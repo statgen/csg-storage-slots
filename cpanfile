@@ -1,3 +1,4 @@
+requires 'local::lib';
 requires 'Modern::Perl';
 requires 'Moose';
 
