@@ -1,2 +1,2 @@
 test:
-	prove -v t/*.t
+	prove -v t/
