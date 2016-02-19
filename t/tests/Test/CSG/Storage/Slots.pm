@@ -11,12 +11,20 @@ sub class {
 
 sub startup : Test(startup) {
 
-  # TODO - create sqlite database file
+  # TODO - create test database
 }
 
-sub setup : Test(setup) {
+sub setup : Test(setup => 1) {
+  my ($self) = @_;
 
-  # TODO - load fixture data into db
+   my $slot = $self->class->new(
+    name    => 'foo',
+    project => 'topmed',
+    size    => '300GB',
+  );
+
+  isa_ok($slot, $self->class);
+  $self->{stash}->{slot} = $slot;
 }
 
 sub teardown : Test(teardown) {
@@ -26,19 +34,14 @@ sub teardown : Test(teardown) {
 
 sub shutdown : Test(shutdown) {
 
-  # TODO - delete sqlite database file
+  # TODO - drop test database
 }
 
-sub test_new : Test(no_plan) {
+sub test_path : Test(1) {
   my ($self) = @_;
+  my $slot   = $self->{stash}->{slot};
 
-  my $slot = $self->class->new(
-    name    => 'foo',
-    project => 'topmed',
-    size    => '300GB',
-  );
-
-  isa_ok($slot, $self->class);
+  is($slot->to_string, '/tmp/foo', 'path matches');
 }
 
 # TODO - test to write

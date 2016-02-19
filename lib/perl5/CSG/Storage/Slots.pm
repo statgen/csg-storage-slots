@@ -3,7 +3,7 @@ package CSG::Storage::Slots;
 use Modern::Perl;
 use Moose;
 use File::Spec;
-use URI::file;
+use URI;
 
 # TODO setup overload for stringification
 
@@ -13,11 +13,7 @@ has 'size'    => (is => 'ro', isa => 'Str', required => 1);    # TODO - make hum
 has 'path' => (is => 'ro', isa => 'URI', lazy => 1, builder => '_build_path');
 
 sub _build_path {
-  my ($self) = @_;
-
-  my $path = File::Spec->join('tmp', $self->name);
-
-  return URI::file->new($path);
+  return URI->new(File::Spec->join('/tmp', shift->name));
 }
 
 sub to_string {
