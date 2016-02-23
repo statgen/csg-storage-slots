@@ -7,7 +7,8 @@ before_install:
 services:
   - mysql
 env:
-  - SLOTS_DB="slots_test"
-  - SLOTS_HOST="127.0.0.1"
-  - SLOTS_DB_USER="travis"
-  - SLOTS_DB_PASS=""
+  global:
+    - SLOTS_DB="slots_test"
+    - SLOTS_HOST="127.0.0.1"
+    - SLOTS_DB_USER="travis"
+    - SLOTS_DB_PASS=""
