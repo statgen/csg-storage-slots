@@ -94,6 +94,20 @@ __PACKAGE__->add_columns(
 
 __PACKAGE__->set_primary_key("id");
 
+=head1 UNIQUE CONSTRAINTS
+
+=head2 C<index2>
+
+=over 4
+
+=item * L</name>
+
+=back
+
+=cut
+
+__PACKAGE__->add_unique_constraint("index2", ["name"]);
+
 =head1 RELATIONS
 
 =head2 filesystems
@@ -112,8 +126,8 @@ __PACKAGE__->has_many(
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.07043 @ 2016-02-23 10:47:35
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:0Vci2FeWSgM85DPImsu5xg
+# Created by DBIx::Class::Schema::Loader v0.07043 @ 2016-02-23 15:29:05
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:yM5pfv4CwNND+8H3b43xHg
 
 
 # You can replace this text with custom code or comments, and it will be preserved on regeneration
