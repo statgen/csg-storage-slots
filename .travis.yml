@@ -4,3 +4,10 @@ perl:
   - "5.10.1"
 before_install:
   - cpanm -nq --local-lib=~/perl5 local::lib && eval $(perl -I ~/perl5/lib/perl5/ -Mlocal::lib)
+services:
+  - mysql
+env:
+  - SLOTS_DB="slots_test"
+  - SLOTS_HOST="127.0.0.1"
+  - SLOTS_DB_USER="travis"
+  - SLOTS_DB_PASS=""

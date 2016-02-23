@@ -1,0 +1,18 @@
+-
+  name: 'foo1'
+  hostname: 'foo1.localhost'
+  current_storage: '200T'
+  alloc_storage: '100T'
+  total_storage: '400T'
+  path: '/working/slots'
+  type: 'file'
+  project: 'proj1'
+-
+  name: 'foo2'
+  hostname: 'foo2.localhost'
+  current_storage: '300T'
+  alloc_storage: '100T'
+  total_storage: '400T'
+  path: '/working/slots'
+  type: 'file'
+  project: 'proj1'
