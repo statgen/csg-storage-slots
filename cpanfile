@@ -4,6 +4,8 @@ requires 'Moose';
 requires 'URI';
 requires 'DBIx::Class::Schema::Loader';
 requires 'Exception::Class';
+requires 'DateTime';
+requires 'DateTime::Format::MySQL';
 
 on 'test' => sub {
   requires 'SQL::Translator';

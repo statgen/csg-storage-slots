@@ -7,6 +7,7 @@ use Test::Exception;
 use Modern::Perl;
 use YAML qw(LoadFile);
 use Data::Dumper;
+use Digest::SHA qw(sha1_hex);
 
 use CSG::Storage::Slots;
 use CSG::Storage::Slots::DB;
@@ -85,8 +86,16 @@ sub test_path : Test(2) {
     size    => '300GB',
   );
 
-  like($slot->to_string, qr{/working/slots[1|2]/foo}, 'to_string() path matches');
-  like("$slot", qr{/working/slots[1|2]/foo}, 'stringification path matches');
+  like($slot->to_string, qr{^foo[1|2]\.localhost/working/slots[1|2]/8/8/4/3/foo}, 'to_string() path matches');
+  like("$slot", qr{^foo[1|2]\.localhost/working/slots[1|2]/8/8/4/3/foo}, 'stringification path matches');
+}
+
+sub test_sha1 : Test(1) {
+  my ($self) = @_;
+  my $name   = 'foobarbaz';
+  my $slot   = $self->class->new(name => $name, project => 'proj1', size => '200GB');
+
+  is($slot->sha1, sha1_hex($name), 'SHA1 should match');
 }
 
 1;
