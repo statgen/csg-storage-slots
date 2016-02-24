@@ -3,6 +3,7 @@ requires 'Modern::Perl';
 requires 'Moose';
 requires 'URI';
 requires 'DBIx::Class::Schema::Loader';
+requires 'Exception::Class';
 
 on 'test' => sub {
   requires 'SQL::Translator';
