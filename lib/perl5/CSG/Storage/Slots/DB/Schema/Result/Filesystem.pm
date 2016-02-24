@@ -21,11 +21,13 @@ use base 'DBIx::Class::Core';
 
 =item * L<DBIx::Class::InflateColumn::DateTime>
 
+=item * L<DBIx::Class::CSG::CreatedAt>
+
 =back
 
 =cut
 
-__PACKAGE__->load_components("InflateColumn::DateTime");
+__PACKAGE__->load_components("InflateColumn::DateTime", "CSG::CreatedAt");
 
 =head1 TABLE: C<filesystems>
 
@@ -198,8 +200,8 @@ __PACKAGE__->belongs_to(
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.07043 @ 2016-02-23 10:47:35
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:qz6sHLLBK6pSa7BIdor7iA
+# Created by DBIx::Class::Schema::Loader v0.07043 @ 2016-02-24 13:46:23
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:7j2JWpGESjE0CRltfJsnKA
 
 
 # You can replace this text with custom code or comments, and it will be preserved on regeneration
