@@ -4,22 +4,27 @@ use Modern::Perl;
 use Moose;
 use File::Spec;
 use URI;
-use overload '""' => sub { shift->to_string };
+use overload '""' => sub {shift->to_string};
 
 use CSG::Storage::Slots::DB;
+use CSG::Storage::Slots::Exceptions;
+use CSG::Storage::Slots::Types;
 
-has 'name'    => (is => 'ro', isa => 'Str', required => 1);    # TODO - test for duplicates
-has 'project' => (is => 'ro', isa => 'Str', required => 1);    # TODO - validate with known groups via type
-has 'size'    => (is => 'ro', isa => 'Str', required => 1);    # TODO - make human readable filesystem size i.e. 250GB
+has 'name'    => (is => 'ro', isa => 'ValidSlotName', required => 1);
+has 'project' => (is => 'ro', isa => 'ValidProject',  required => 1);
+has 'size'    => (is => 'ro', isa => 'ValidSlotSize', required => 1);
 
-has 'path'    => (is => 'ro', isa => 'URI', lazy => 1, builder => '_build_path');
+has 'path' => (is => 'ro', isa => 'URI', lazy => 1, builder => '_build_path');
 
-# TODO - find next available slot
 sub _build_path {
   my ($self) = @_;
   my $schema = CSG::Storage::Slots::DB->new();
 
-  return URI->new(File::Spec->join('/tmp', shift->name));
+  # TODO - determine next available filesystem
+  #      - record slot
+  my $fs = $schema->resultset('Filesystem')->search({}, {order_by => 'rand()', limit => 1})->first;
+
+  return URI->new(File::Spec->join($fs->path, $self->name));
 }
 
 sub to_string {

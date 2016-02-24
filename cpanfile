@@ -9,4 +9,5 @@ on 'test' => sub {
   requires 'YAML';
   requires 'Test::Class';
   requires 'Test::More';
+  requires 'Test::Exception';
 };

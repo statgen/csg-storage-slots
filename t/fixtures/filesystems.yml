@@ -4,7 +4,7 @@
   current_storage: '200T'
   alloc_storage: '100T'
   total_storage: '400T'
-  path: '/working/slots'
+  path: '/working/slots1'
   type: 'file'
   project: 'proj1'
 -
@@ -13,6 +13,11 @@
   current_storage: '300T'
   alloc_storage: '100T'
   total_storage: '400T'
-  path: '/working/slots'
+  path: '/working/slots2'
   type: 'file'
   project: 'proj1'
+  slots:
+    -
+      name: 'foo'
+      alloc_size: '100T'
+      current_size: '50G'
