@@ -67,19 +67,13 @@ __PACKAGE__->table("filesystems");
   is_nullable: 0
   size: 45
 
-=head2 current_storage
+=head2 size_used
 
   data_type: 'varchar'
   is_nullable: 0
   size: 45
 
-=head2 alloc_storage
-
-  data_type: 'varchar'
-  is_nullable: 0
-  size: 45
-
-=head2 total_storage
+=head2 size_total
 
   data_type: 'varchar'
   is_nullable: 0
@@ -117,11 +111,9 @@ __PACKAGE__->add_columns(
   { data_type => "varchar", is_nullable => 0, size => 45 },
   "hostname",
   { data_type => "varchar", is_nullable => 0, size => 45 },
-  "current_storage",
+  "size_used",
   { data_type => "varchar", is_nullable => 0, size => 45 },
-  "alloc_storage",
-  { data_type => "varchar", is_nullable => 0, size => 45 },
-  "total_storage",
+  "size_total",
   { data_type => "varchar", is_nullable => 0, size => 45 },
   "path",
   { data_type => "varchar", is_nullable => 0, size => 45 },
@@ -151,6 +143,22 @@ __PACKAGE__->add_columns(
 =cut
 
 __PACKAGE__->set_primary_key("id");
+
+=head1 UNIQUE CONSTRAINTS
+
+=head2 C<index6>
+
+=over 4
+
+=item * L</name>
+
+=item * L</hostname>
+
+=back
+
+=cut
+
+__PACKAGE__->add_unique_constraint("index6", ["name", "hostname"]);
 
 =head1 RELATIONS
 
@@ -200,8 +208,8 @@ __PACKAGE__->belongs_to(
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.07043 @ 2016-02-24 13:46:23
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:7j2JWpGESjE0CRltfJsnKA
+# Created by DBIx::Class::Schema::Loader v0.07043 @ 2016-02-29 08:40:55
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:Rj0/2epr+S6ITpYC8TPAUg
 
 
 # You can replace this text with custom code or comments, and it will be preserved on regeneration

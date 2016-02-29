@@ -47,7 +47,7 @@ __PACKAGE__->table("slots");
 
   data_type: 'integer'
   is_foreign_key: 1
-  is_nullable: 1
+  is_nullable: 0
 
 =head2 name
 
@@ -55,13 +55,7 @@ __PACKAGE__->table("slots");
   is_nullable: 0
   size: 255
 
-=head2 alloc_size
-
-  data_type: 'varchar'
-  is_nullable: 0
-  size: 45
-
-=head2 current_size
+=head2 size
 
   data_type: 'varchar'
   is_nullable: 0
@@ -86,12 +80,10 @@ __PACKAGE__->add_columns(
   "id",
   { data_type => "integer", is_auto_increment => 1, is_nullable => 0 },
   "filesystem_id",
-  { data_type => "integer", is_foreign_key => 1, is_nullable => 1 },
+  { data_type => "integer", is_foreign_key => 1, is_nullable => 0 },
   "name",
   { data_type => "varchar", is_nullable => 0, size => 255 },
-  "alloc_size",
-  { data_type => "varchar", is_nullable => 0, size => 45 },
-  "current_size",
+  "size",
   { data_type => "varchar", is_nullable => 0, size => 45 },
   "created_at",
   {
@@ -148,17 +140,12 @@ __PACKAGE__->belongs_to(
   "filesystem",
   "CSG::Storage::Slots::DB::Schema::Result::Filesystem",
   { id => "filesystem_id" },
-  {
-    is_deferrable => 1,
-    join_type     => "LEFT",
-    on_delete     => "NO ACTION",
-    on_update     => "NO ACTION",
-  },
+  { is_deferrable => 1, on_delete => "NO ACTION", on_update => "NO ACTION" },
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.07043 @ 2016-02-24 13:46:23
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:miNyuE5GZCfm0LJ/fmJwAw
+# Created by DBIx::Class::Schema::Loader v0.07043 @ 2016-02-29 08:40:55
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:iwUFEVeSIMsaCabrAJRV1w
 
 
 # You can replace this text with custom code or comments, and it will be preserved on regeneration

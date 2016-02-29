@@ -37,14 +37,13 @@ sub startup : Test(startup) {
     diag("Creating filesystem: $filesystem->{name}");
     my $fs = $schema->resultset('Filesystem')->find_or_create(
       {
-        name            => $filesystem->{name},
-        hostname        => $filesystem->{hostname},
-        current_storage => $filesystem->{current_storage},
-        alloc_storage   => $filesystem->{alloc_storage},
-        total_storage   => $filesystem->{total_storage},
-        path            => $filesystem->{path},
-        type_id         => $type->id,
-        project_id      => $project->id,
+        name       => $filesystem->{name},
+        hostname   => $filesystem->{hostname},
+        size_used  => $filesystem->{size_used},
+        size_total => $filesystem->{size_total},
+        path       => $filesystem->{path},
+        type_id    => $type->id,
+        project_id => $project->id,
       }
     );
 
@@ -52,9 +51,8 @@ sub startup : Test(startup) {
       diag("Creating slot: $slot->{name}");
       $fs->add_to_slots(
         {
-          name         => $slot->{name},
-          alloc_size   => $slot->{alloc_size},
-          current_size => $slot->{current_size},
+          name => $slot->{name},
+          size => $slot->{size},
         }
       );
     }

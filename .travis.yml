@@ -13,3 +13,5 @@ env:
     - SLOTS_HOST="127.0.0.1"
     - SLOTS_DB_USER="travis"
     - SLOTS_DB_PASS=""
+notifications:
+  slack: um-csg:YLfnXQ2sPWMxMRpA15iRNs34
