@@ -1,8 +1,8 @@
 -
-  filename: 'sample1.bam'
+  filename: 'NA11931.mapped.LS454.ssaha2.CEU.low_coverage.20101123.chrom20.20000001.20300000.bam'
   project: 'proj1'
-  sample_id: 'NWD123456'
+  sample_id: 'NA11931'
 -
-  filename: 'sample2.bam'
+  filename: 'NA12889.mapped.ILLUMINA.bwa.CEU.low_coverage.20101123.chrom20.20000001.20300000.bam'
   project: 'proj1'
-  sample_id: 'NWD987654'
+  sample_id: 'NA12889'

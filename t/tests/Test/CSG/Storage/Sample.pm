@@ -23,14 +23,11 @@ sub startup : Test(startup => 2) {
   for my $fixture (@{$fixtures}) {
     my $filename = File::Spec->join(File::Temp->newdir(), $fixture->{filename});
 
-    # TODO - write random length data to $filename
-    #      - record size of $filename
-
     my $sample = $self->class->new(
       filename  => $filename,
       sample_id => $fixture->{sample_id},
       project   => $fixture->{project},
-      prefix    => '/net',
+      prefix    => qq{$FindBin::Bin/../t/fixtures/samples},
     );
 
     isa_ok($sample, $self->class);
