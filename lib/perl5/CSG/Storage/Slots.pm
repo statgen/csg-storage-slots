@@ -46,13 +46,25 @@ sub to_string {
 }
 
 sub find {
-  # TODO - given a name we need to find the existing slot path
-  #
-  # XXX - can the required attributes be bypassed?
+  my $class  = shift;
+  my %params = @_;
+  my $schema = CSG::Storage::Slots::DB->new();
+  my $slot   = $schema->resultset('Slot')->search(
+    {
+      'me.name'      => $params{name},
+      'me.size'      => $params{size},
+      'project.name' => $params{project},
+    }, {
+      join => {filesystem => 'project'},
+    }
+  );
+
+  return $slot->first;
 }
 
 sub find_or_create {
-  # TODO - look for existing slot record creating one if not found
+  my $class  = shift;
+  return $class->find(@_) // $class->new(@_);
 }
 
 no Moose;

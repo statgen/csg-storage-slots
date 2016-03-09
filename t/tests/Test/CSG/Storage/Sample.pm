@@ -21,16 +21,15 @@ sub startup : Test(startup => 2) {
   my $fixtures = LoadFile(qq{$FindBin::Bin/../t/fixtures/samples.yml});
 
   for my $fixture (@{$fixtures}) {
-    my $filename = File::Spec->join(File::Temp->newdir(), $fixture->{filename});
-
     my $sample = $self->class->new(
-      filename  => $filename,
+      filename  => qq{$FindBin::Bin/../t/fixtures/samples/$fixture->{filename}},
       sample_id => $fixture->{sample_id},
       project   => $fixture->{project},
-      prefix    => qq{$FindBin::Bin/../t/fixtures/samples},
+      prefix    => '/tmp',
     );
 
     isa_ok($sample, $self->class);
+    diag $sample->path;
   }
 
 }

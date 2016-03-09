@@ -10,7 +10,7 @@ use CSG::Storage::Types;
 
 our $VERSION = '0.1';
 
-has 'filename'  => (is => 'ro', isa => 'Str',             required => 1);
+has 'filename'  => (is => 'ro', isa => 'ValidFile',       required => 1);
 has 'sample_id' => (is => 'ro', isa => 'Str',             required => 1);
 has 'project'   => (is => 'ro', isa => 'Str',             required => 1);
 has 'prefix'    => (is => 'ro', isa => 'ValidPrefixPath', required => 1);
@@ -26,7 +26,7 @@ sub _build_size {
 sub _build_path {
   my ($self) = @_;
 
-  my $slot = CSG::Storage::Slot->find_or_create(
+  my $slot = CSG::Storage::Slots->find_or_create(
     name    => $self->sample_id,
     size    => $self->allocate_size,
     project => $self->project,
