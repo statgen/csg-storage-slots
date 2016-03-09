@@ -6,6 +6,7 @@ requires 'DBIx::Class::Schema::Loader';
 requires 'Exception::Class';
 requires 'DateTime';
 requires 'DateTime::Format::MySQL';
+requires 'Path::Class';
 
 on 'test' => sub {
   requires 'SQL::Translator';

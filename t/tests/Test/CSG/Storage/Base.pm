@@ -64,7 +64,9 @@ sub _startup : Test(startup) {
 }
 
 sub _teardown : Test(teardown) {
-  remove_tree(shift->prefix, {verbose => 1, keep_root => 0});
+  my ($self) = @_;
+  diag('remove temporary directory ' . $self->prefix);
+  remove_tree($self->prefix);
 }
 
 1;

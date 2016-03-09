@@ -1,8 +1,12 @@
 package CSG::Storage::Sample;
 
+use autodie qw(:all);
 use Modern::Perl;
 use Moose;
+use File::Copy;
+use File::Path qw(make_path);
 use File::Spec;
+use Path::Class;
 use overload '""' => sub {shift->to_string};
 
 use CSG::Storage::Slots;
@@ -16,8 +20,9 @@ has 'project'   => (is => 'ro', isa => 'Str',             required => 1);
 has 'prefix'    => (is => 'ro', isa => 'ValidPrefixPath', required => 1);
 has 'factor'    => (is => 'ro', isa => 'Int',             default  => sub {4});
 
-has 'size' => (is => 'ro', isa => 'Int', lazy => 1, builder => '_build_size');
-has 'path' => (is => 'ro', isa => 'Str', lazy => 1, builder => '_build_path');
+has 'size'          => (is => 'ro', isa => 'Int', lazy => 1, builder => '_build_size');
+has 'path'          => (is => 'ro', isa => 'Str', lazy => 1, builder => '_build_path');
+has 'incoming_path' => (is => 'ro', isa => 'Str', lazy => 1, builder => '_build_incoming_path');
 
 sub _build_size {
   return (stat(shift->filename))[7];
@@ -35,6 +40,15 @@ sub _build_path {
   return File::Spec->join($self->prefix, $slot->path);
 }
 
+sub _build_incoming_path {
+  my ($self) = @_;
+
+  my $dir = Path::Class::Dir->new($self->filename);
+  my $name = ($dir->components)[-1];
+
+  return File::Spec->join($self->path, 'incoming', $name);
+}
+
 sub allocate_size {
   my ($self) = @_;
   return $self->size * $self->factor;
@@ -43,9 +57,24 @@ sub allocate_size {
 sub stage {
   my ($self) = @_;
 
-  # TODO - use make_path to create the sample directory structure
-  #
-  # can't do this without knowing the real fullpath
+  my @skel_dirs = map {File::Spec->join($self->path, $_)} (qw(incoming backup mapping logs run info));
+  make_path(@skel_dirs, {error => \my $err});
+
+  if (@{$err}) {
+    my $errstr;
+    for (@{$err}) {
+      my ($key, $value) = %{$_};
+      $errstr = $value if $key eq '';
+    }
+
+    CSG::Storage::Slots::Exceptions::Sample::FailedSkeletonDirectory->throw(error => $errstr);
+  }
+
+  unless (copy($self->filename, $skel_dirs[0])) {
+    CSG::Storage::Slots::Exceptions::Sample::FailedCopy->throw(error => $!);
+  }
+
+  return;
 }
 
 sub to_string {
