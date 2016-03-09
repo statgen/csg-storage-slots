@@ -11,6 +11,8 @@ requires 'Path::Class';
 on 'test' => sub {
   requires 'SQL::Translator';
   requires 'YAML';
+  requires 'File::Stat';
+
   requires 'Test::Class';
   requires 'Test::More';
   requires 'Test::Exception';
