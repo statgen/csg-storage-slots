@@ -1,13 +1,10 @@
 package Test::CSG::Storage::Sample;
 
-use base qw(Test::Class);
+use base qw(Test::CSG::Storage::Base);
 use Test::More;
-use Test::Exception;
 
-use FindBin;
 use Modern::Perl;
 use YAML qw(LoadFile);
-use File::Temp;
 
 use CSG::Storage::Sample;
 
@@ -18,23 +15,27 @@ sub class {
 sub startup : Test(startup => 2) {
   my ($self) = @_;
 
-  my $fixtures = LoadFile(qq{$FindBin::Bin/../t/fixtures/samples.yml});
+  my $fixtures = LoadFile(File::Spec->join($self->fixture_path, 'samples.yml'));
 
   for my $fixture (@{$fixtures}) {
     my $sample = $self->class->new(
-      filename  => qq{$FindBin::Bin/../t/fixtures/samples/$fixture->{filename}},
+      filename  => File::Spec->join($self->fixture_path, 'samples', $fixture->{filename}),
       sample_id => $fixture->{sample_id},
       project   => $fixture->{project},
-      prefix    => '/tmp',
+      prefix    => $self->prefix,
     );
 
     isa_ok($sample, $self->class);
     diag $sample->path;
+
+    push @{$self->{stash}->{samples}}, $sample;
   }
 
 }
 
 sub test_allocate_size : Test(no_plan) {
+  my ($self) = @_;
+
 }
 
 sub test_stage : Test(no_plan) {
