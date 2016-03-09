@@ -7,6 +7,7 @@ requires 'Exception::Class';
 requires 'DateTime';
 requires 'DateTime::Format::MySQL';
 requires 'Path::Class';
+requires 'IPC::System::Simple';
 
 on 'test' => sub {
   requires 'SQL::Translator';
