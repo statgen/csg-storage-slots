@@ -1,0 +1,8 @@
+-
+  filename: 'sample1.bam'
+  project: 'proj1'
+  sample_id: 'NWD123456'
+-
+  filename: 'sample2.bam'
+  project: 'proj1'
+  sample_id: 'NWD987654'

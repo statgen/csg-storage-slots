@@ -4,6 +4,7 @@ use base qw(Test::Class);
 use Test::More;
 use Test::Exception;
 
+use FindBin;
 use Modern::Perl;
 use YAML qw(LoadFile);
 use Data::Dumper;

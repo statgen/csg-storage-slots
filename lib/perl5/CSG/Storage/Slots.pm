@@ -45,10 +45,22 @@ sub to_string {
   return shift->path->as_string;
 }
 
+sub find {
+  # TODO - given a name we need to find the existing slot path
+  #
+  # XXX - can the required attributes be bypassed?
+}
+
+sub find_or_create {
+  # TODO - look for existing slot record creating one if not found
+}
+
 no Moose;
 __PACKAGE__->meta->make_immutable;
 
 1;
+
+__END__
 
 =head1 NAME
 
