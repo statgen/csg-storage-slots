@@ -5,6 +5,9 @@ perl:
 before_install:
   - cpanm -nq --local-lib=~/perl5 local::lib && eval $(perl -I ~/perl5/lib/perl5/ -Mlocal::lib)
   - mysql -e "create database IF NOT EXISTS test;" -uroot
+  - cpanm -nq Carton
+install:
+  - carton install
 services:
   - mysql
 env:

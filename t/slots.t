@@ -1,8 +1,7 @@
 #!/usr/bin/env perl
 
-use local::lib;
-use FindBin;
-use lib (qq($FindBin::Bin/../t/tests), qq($FindBin::Bin/../lib/perl5));
-use Test::CSG::Storage::Slots;
+use FindBin qw($Bin);
+use lib (qq($Bin/../local/lib/perl5), qq($Bin/../t/tests), qq($Bin/../lib/perl5));
 
+use Test::CSG::Storage::Slots;
 Test::Class->runtests;
