@@ -80,7 +80,8 @@ sub find {
   return $class->new(
     name    => $slot->name,
     project => $slot->filesystem->project->name,
-    size    => $slot->size
+    size    => $slot->size,
+    _record => $slot,
   );
 }
 
