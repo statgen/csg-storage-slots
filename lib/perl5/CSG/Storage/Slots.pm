@@ -45,7 +45,10 @@ around [qw(name project size path)] => sub {
 
 sub _set_size {
   my ($self, $new, $old) = @_;
-  $self->_record->update({size => $new});
+
+  if ($self->has_record) {
+    $self->_record->update({size => $new});
+  }
 }
 
 sub _build_sha1 {
