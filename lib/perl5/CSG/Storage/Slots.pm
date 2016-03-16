@@ -68,7 +68,6 @@ sub find {
   my $slot   = $schema->resultset('Slot')->search(
     {
       'me.name'      => $params{name},
-      'me.size'      => $params{size},
       'project.name' => $params{project},
     }, {
       join => {filesystem => 'project'},
