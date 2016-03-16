@@ -3,9 +3,13 @@ package CSG::Storage::Slots::DB::Schema::ResultSet::Filesystem;
 use base qw(DBIx::Class::ResultSet);
 
 sub next_available {
-  return shift->search(
-    {},
+  my ($self, $project) = @_;
+  return $self->search(
     {
+      'project.name' => $project
+    },
+    {
+      join     => 'project',
       order_by => 'rand()',
       limit    => 1
     }

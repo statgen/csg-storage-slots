@@ -16,6 +16,46 @@ DISTRIBUTIONS
       Algorithm::Diff::_impl 1.1903
     requirements:
       ExtUtils::MakeMaker 0
+  App-Cmd-0.330
+    pathname: R/RJ/RJBS/App-Cmd-0.330.tar.gz
+    provides:
+      App::Cmd 0.330
+      App::Cmd::ArgProcessor 0.330
+      App::Cmd::Command 0.330
+      App::Cmd::Command::commands 0.330
+      App::Cmd::Command::help 0.330
+      App::Cmd::Command::version 0.330
+      App::Cmd::Plugin 0.330
+      App::Cmd::Setup 0.330
+      App::Cmd::Simple 0.330
+      App::Cmd::Subdispatch 0.330
+      App::Cmd::Subdispatch::DashedStyle 0.330
+      App::Cmd::Tester 0.330
+      App::Cmd::Tester::CaptureExternal 0.330
+      App::Cmd::Tester::Exited 0.330
+      App::Cmd::Tester::Result 0.330
+    requirements:
+      Capture::Tiny 0.13
+      Carp 0
+      Class::Load 0.06
+      Data::OptList 0
+      ExtUtils::MakeMaker 0
+      File::Basename 0
+      Getopt::Long 2.39
+      Getopt::Long::Descriptive 0.084
+      IO::TieCombine 0
+      Module::Pluggable::Object 0
+      Pod::Usage 1.61
+      String::RewritePrefix 0
+      Sub::Exporter 0
+      Sub::Exporter::Util 0
+      Sub::Install 0
+      Text::Abbrev 0
+      constant 0
+      parent 0
+      perl 5.006
+      strict 0
+      warnings 0
   B-Hooks-EndOfScope-0.15
     pathname: E/ET/ETHER/B-Hooks-EndOfScope-0.15.tar.gz
     provides:
@@ -1354,6 +1394,34 @@ DISTRIBUTIONS
       File::Stat 0.01
     requirements:
       ExtUtils::MakeMaker 0
+  Getopt-Long-2.48
+    pathname: J/JV/JV/Getopt-Long-2.48.tar.gz
+    provides:
+      Getopt::Long 2.48
+      Getopt::Long::CallBack 2.48
+      Getopt::Long::Parser 2.48
+    requirements:
+      ExtUtils::MakeMaker 0
+      Pod::Usage 1.14
+  Getopt-Long-Descriptive-0.099
+    pathname: R/RJ/RJBS/Getopt-Long-Descriptive-0.099.tar.gz
+    provides:
+      Getopt::Long::Descriptive 0.099
+      Getopt::Long::Descriptive::Opts 0.099
+      Getopt::Long::Descriptive::Usage 0.099
+    requirements:
+      Carp 0
+      ExtUtils::MakeMaker 0
+      File::Basename 0
+      Getopt::Long 2.33
+      List::Util 0
+      Params::Validate 0.97
+      Scalar::Util 0
+      Sub::Exporter 0.972
+      Sub::Exporter::Util 0
+      overload 0
+      strict 0
+      warnings 0
   HTML-Parser-3.72
     pathname: G/GA/GAAS/HTML-Parser-3.72.tar.gz
     provides:
@@ -1383,6 +1451,18 @@ DISTRIBUTIONS
       Clone 0
       ExtUtils::MakeMaker 0
       perl 5.008001
+  IO-TieCombine-1.005
+    pathname: R/RJ/RJBS/IO-TieCombine-1.005.tar.gz
+    provides:
+      IO::TieCombine 1.005
+      IO::TieCombine::Handle 1.005
+      IO::TieCombine::Scalar 1.005
+    requirements:
+      Carp 0
+      ExtUtils::MakeMaker 0
+      Symbol 0
+      strict 0
+      warnings 0
   IPC-System-Simple-1.25
     pathname: P/PJ/PJF/IPC-System-Simple-1.25.tar.gz
     provides:
@@ -1594,6 +1674,44 @@ DISTRIBUTIONS
       IPC::Cmd 0
       XSLoader 0
       base 0
+  Log-Dispatch-2.54
+    pathname: D/DR/DROLSKY/Log-Dispatch-2.54.tar.gz
+    provides:
+      Log::Dispatch 2.54
+      Log::Dispatch::ApacheLog 2.54
+      Log::Dispatch::Base 2.54
+      Log::Dispatch::Code 2.54
+      Log::Dispatch::Email 2.54
+      Log::Dispatch::Email::MIMELite 2.54
+      Log::Dispatch::Email::MailSend 2.54
+      Log::Dispatch::Email::MailSender 2.54
+      Log::Dispatch::Email::MailSendmail 2.54
+      Log::Dispatch::File 2.54
+      Log::Dispatch::File::Locked 2.54
+      Log::Dispatch::Handle 2.54
+      Log::Dispatch::Null 2.54
+      Log::Dispatch::Output 2.54
+      Log::Dispatch::Screen 2.54
+      Log::Dispatch::Syslog 2.54
+      Log::Dispatch::Vars 2.54
+    requirements:
+      Carp 0
+      Devel::GlobalDestruction 0
+      Dist::CheckConflicts 0.02
+      Encode 0
+      Exporter 0
+      ExtUtils::MakeMaker 0
+      Fcntl 0
+      IO::Handle 0
+      JSON::PP 2.27300
+      Module::Runtime 0
+      Params::Validate 1.03
+      Scalar::Util 0
+      Sys::Syslog 0.28
+      base 0
+      perl 5.006
+      strict 0
+      warnings 0
   MRO-Compat-0.12
     pathname: B/BO/BOBTFISH/MRO-Compat-0.12.tar.gz
     provides:
@@ -2305,6 +2423,18 @@ DISTRIBUTIONS
       overload 0
       parent 0
       strict 0
+  Pod-Usage-1.68
+    pathname: M/MA/MAREKR/Pod-Usage-1.68.tar.gz
+    provides:
+      Pod::Usage 1.68
+    requirements:
+      Cwd 0
+      ExtUtils::MakeMaker 0
+      File::Basename 0
+      File::Spec 0.82
+      Pod::Text 4
+      Test::More 0.6
+      blib 0
   Role-Tiny-2.000001
     pathname: H/HA/HAARG/Role-Tiny-2.000001.tar.gz
     provides:
@@ -2477,6 +2607,16 @@ DISTRIBUTIONS
     requirements:
       ExtUtils::MakeMaker 0
       Test::More 0
+  String-RewritePrefix-0.007
+    pathname: R/RJ/RJBS/String-RewritePrefix-0.007.tar.gz
+    provides:
+      String::RewritePrefix 0.007
+    requirements:
+      Carp 0
+      ExtUtils::MakeMaker 6.30
+      Sub::Exporter 0.972
+      strict 0
+      warnings 0
   String-ToIdentifier-EN-0.11
     pathname: R/RK/RKITOVER/String-ToIdentifier-EN-0.11.tar.gz
     provides:
@@ -2552,6 +2692,21 @@ DISTRIBUTIONS
       perl 5.006
       strict 0
       warnings 0
+  Sys-Syslog-0.33
+    pathname: S/SA/SAPER/Sys-Syslog-0.33.tar.gz
+    provides:
+      Sys::Syslog 0.33
+      Sys::Syslog::Win32 undef
+    requirements:
+      Carp 0
+      ExtUtils::MakeMaker 0
+      Fcntl 0
+      File::Basename 0
+      File::Spec 0
+      POSIX 0
+      Socket 0
+      Test::More 0
+      XSLoader 0
   Task-Weaken-1.04
     pathname: A/AD/ADAMK/Task-Weaken-1.04.tar.gz
     provides:
@@ -3020,6 +3175,21 @@ DISTRIBUTIONS
       ExtUtils::MakeMaker 0
       Package::Stash 0.23
       perl 5.008001
+  podlators-4.06
+    pathname: R/RR/RRA/podlators-4.06.tar.gz
+    provides:
+      Pod undef
+      Pod::Man 4.06
+      Pod::ParseLink 4.06
+      Pod::Text 4.06
+      Pod::Text::Color 4.06
+      Pod::Text::Overstrike 4.06
+      Pod::Text::Termcap 4.06
+    requirements:
+      Encode 0
+      ExtUtils::MakeMaker 0
+      Pod::Simple 3.06
+      perl 5.006
   strictures-2.000002
     pathname: H/HA/HAARG/strictures-2.000002.tar.gz
     provides:

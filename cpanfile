@@ -8,6 +8,9 @@ requires 'DateTime';
 requires 'DateTime::Format::MySQL';
 requires 'Path::Class';
 requires 'IPC::System::Simple';
+requires 'App::Cmd';
+requires 'Log::Dispatch';
+requires 'Try::Tiny';
 
 on 'test' => sub {
   requires 'SQL::Translator';
