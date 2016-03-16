@@ -15,7 +15,7 @@ our $VERSION = "0.1";
 
 has 'name'    => (is => 'ro', isa => 'Str',           required => 1);
 has 'project' => (is => 'ro', isa => 'ValidProject',  required => 1);
-has 'size'    => (is => 'ro', isa => 'ValidSlotSize', required => 1);
+has 'size'    => (is => 'rw', isa => 'ValidSlotSize', required => 1, trigger => \&_set_size);
 
 has 'sha1' => (is => 'ro', isa => 'Str', lazy => 1, builder => '_build_sha1');
 has 'path' => (is => 'ro', isa => 'URI', lazy => 1, builder => '_build_path');
@@ -42,6 +42,11 @@ around [qw(name project size path)] => sub {
 
   return $self->$orig(@_);
 };
+
+sub _set_size {
+  my ($self, $new, $old) = @_;
+  $self->_record->update({size => $new});
+}
 
 sub _build_sha1 {
   return sha1_hex(shift->name);
