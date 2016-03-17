@@ -1394,6 +1394,17 @@ DISTRIBUTIONS
       File::Stat 0.01
     requirements:
       ExtUtils::MakeMaker 0
+  Filesys-DiskUsage-0.08
+    pathname: S/SZ/SZABGAB/Filesys-DiskUsage-0.08.tar.gz
+    provides:
+      Filesys::DiskUsage 0.08
+    requirements:
+      ExtUtils::MakeMaker 0
+      File::Basename 0
+      File::Find 0
+      File::Temp 0
+      Test::More 0
+      Test::Warn 0
   Getopt-Long-2.48
     pathname: J/JV/JV/Getopt-Long-2.48.tar.gz
     provides:

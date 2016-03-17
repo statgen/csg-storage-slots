@@ -11,6 +11,8 @@ requires 'IPC::System::Simple';
 requires 'App::Cmd';
 requires 'Log::Dispatch';
 requires 'Try::Tiny';
+requires 'Filesys::DiskUsage';
+requires 'File::Spec';
 
 on 'test' => sub {
   requires 'SQL::Translator';
