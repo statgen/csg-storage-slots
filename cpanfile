@@ -13,6 +13,7 @@ requires 'Log::Dispatch';
 requires 'Try::Tiny';
 requires 'Filesys::DiskUsage';
 requires 'File::Spec';
+requires 'Number::Bytes::Human';
 
 on 'test' => sub {
   requires 'SQL::Translator';

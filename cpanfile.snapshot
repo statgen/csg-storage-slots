@@ -2287,6 +2287,15 @@ DISTRIBUTIONS
       parent 0.223
       strict 1.03
       warnings 1.03
+  Number-Bytes-Human-0.09
+    pathname: D/DA/DAGOBERT/Number-Bytes-Human-0.09.tar.gz
+    provides:
+      Number::Bytes::Human 0.09
+    requirements:
+      Carp 0
+      ExtUtils::MakeMaker 0
+      POSIX 0
+      Test::More 0
   Package-DeprecationManager-0.15
     pathname: D/DR/DROLSKY/Package-DeprecationManager-0.15.tar.gz
     provides:
