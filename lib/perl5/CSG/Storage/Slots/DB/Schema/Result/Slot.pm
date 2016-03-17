@@ -120,11 +120,13 @@ __PACKAGE__->set_primary_key("id");
 
 =item * L</name>
 
+=item * L</filesystem_id>
+
 =back
 
 =cut
 
-__PACKAGE__->add_unique_constraint("index3", ["name"]);
+__PACKAGE__->add_unique_constraint("index3", ["name", "filesystem_id"]);
 
 =head1 RELATIONS
 
@@ -144,8 +146,8 @@ __PACKAGE__->belongs_to(
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.07043 @ 2016-02-29 08:40:55
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:iwUFEVeSIMsaCabrAJRV1w
+# Created by DBIx::Class::Schema::Loader v0.07043 @ 2016-03-17 09:10:22
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:D1jEgs7M4AiACjfJ0sroyQ
 
 
 # You can replace this text with custom code or comments, and it will be preserved on regeneration

@@ -69,15 +69,15 @@ __PACKAGE__->table("filesystems");
 
 =head2 size_used
 
-  data_type: 'varchar'
+  data_type: 'bigint'
+  default_value: 0
   is_nullable: 0
-  size: 45
 
 =head2 size_total
 
-  data_type: 'varchar'
+  data_type: 'bigint'
+  default_value: 0
   is_nullable: 0
-  size: 45
 
 =head2 path
 
@@ -112,9 +112,9 @@ __PACKAGE__->add_columns(
   "hostname",
   { data_type => "varchar", is_nullable => 0, size => 45 },
   "size_used",
-  { data_type => "varchar", is_nullable => 0, size => 45 },
+  { data_type => "bigint", default_value => 0, is_nullable => 0 },
   "size_total",
-  { data_type => "varchar", is_nullable => 0, size => 45 },
+  { data_type => "bigint", default_value => 0, is_nullable => 0 },
   "path",
   { data_type => "varchar", is_nullable => 0, size => 45 },
   "created_at",
@@ -208,8 +208,8 @@ __PACKAGE__->belongs_to(
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.07043 @ 2016-02-29 08:40:55
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:Rj0/2epr+S6ITpYC8TPAUg
+# Created by DBIx::Class::Schema::Loader v0.07043 @ 2016-03-17 09:14:26
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:qpIt/ibum1M9j3dur5M/Uw
 
 
 # You can replace this text with custom code or comments, and it will be preserved on regeneration
