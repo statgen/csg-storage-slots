@@ -28,7 +28,7 @@ around [qw(name project size path)] => sub {
 
   unless ($self->has_record) {
     my $schema = CSG::Storage::Slots::DB->new();
-    my $fs     = $schema->resultset('Filesystem')->next_available($self->{project});
+    my $fs     = $schema->resultset('Filesystem')->next_available($self->{project}, $self->{size});
     my $record = $schema->resultset('Slot')->find_or_create(
       {
         name          => $self->{name},
