@@ -2,7 +2,7 @@ package CSG::Storage::Slot::Command::collect;
 
 use CSG::Storage::Slot -command;
 use CSG::Storage::Slots::DB;
-use CSG::Storage::Slots::Logger;
+use CSG::Logger;
 
 use File::Spec;
 use Filesys::DiskUsage qw(du);
@@ -25,7 +25,7 @@ sub execute {
   my ($self, $opts, $args) = @_;
 
   my $schema = CSG::Storage::Slots::DB->new();
-  my $logger = CSG::Storage::Slots::Logger->new();
+  my $logger = CSG::Logger->new();
 
   for my $fs ($schema->resultset('Pool')->all()) {
     my $path = File::Spec->canonpath(File::Spec->join($opts->{prefix}, $fs->hostname, $fs->path));

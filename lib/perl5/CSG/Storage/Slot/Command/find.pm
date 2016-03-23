@@ -3,7 +3,7 @@ package CSG::Storage::Slot::Command::find;
 use CSG::Storage::Slot -command;
 
 use CSG::Storage::Slots;
-use CSG::Storage::Slots::Logger;
+use CSG::Logger;
 
 sub opt_spec {
   return (
@@ -28,7 +28,7 @@ sub execute {
   my ($self, $opts, $args) = @_;
 
   my $rc     = 0;
-  my $logger = CSG::Storage::Slots::Logger->new();
+  my $logger = CSG::Logger->new();
   my $slot   = CSG::Storage::Slots->find(name => $opts->{name}, project => $opts->{project});
 
   if ($slot) {

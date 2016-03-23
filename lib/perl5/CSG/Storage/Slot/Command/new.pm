@@ -6,7 +6,7 @@ use Modern::Perl;
 use Try::Tiny;
 
 use CSG::Storage::Sample;
-use CSG::Storage::Slots::Logger;
+use CSG::Logger;
 
 sub opt_spec {
   return (
@@ -40,7 +40,7 @@ sub validate_args {
 sub execute {
   my ($self, $opts, $args) = @_;
 
-  my $logger = CSG::Storage::Slots::Logger->new();
+  my $logger = CSG::Logger->new();
   my $rc     = 0;
   my $sample = undef;
 

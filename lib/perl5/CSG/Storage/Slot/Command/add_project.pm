@@ -2,7 +2,7 @@ package CSG::Storage::Slot::Command::add_project;
 
 use CSG::Storage::Slot -command;
 use CSG::Storage::Slots::DB;
-use CSG::Storage::Slots::Logger;
+use CSG::Logger;
 
 sub opt_spec {
   return (['name=s', 'Project name', {required => 1}],);
