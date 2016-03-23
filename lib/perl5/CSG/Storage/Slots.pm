@@ -22,7 +22,7 @@ has 'path' => (is => 'ro', isa => 'URI', lazy => 1, builder => '_build_path');
 
 has '_record' => (is => 'rw', isa => __PACKAGE__ . '::DB::Schema::Result::Slot', predicate => 'has_record');
 
-around [qw(name project size path)] => sub {
+around [qw(name project size path sha1)] => sub {
   my $orig = shift;
   my $self = shift;
 
@@ -33,6 +33,7 @@ around [qw(name project size path)] => sub {
       {
         name    => $self->{name},
         size    => $self->{size},
+        sha1    => sha1_hex($self->{name}),
         pool_id => $pool->id,
       }
     );
@@ -52,7 +53,7 @@ sub _set_size {
 }
 
 sub _build_sha1 {
-  return sha1_hex(shift->name);
+  return shift->_record->sha1;
 }
 
 sub _build_path {
