@@ -1,6 +1,6 @@
-package CSG::Storage::Slots::Slot::Command::update;
+package CSG::Storage::Slot::Command::update;
 
-use CSG::Storage::Slots::Slot -command;
+use CSG::Storage::Slot -command;
 
 use CSG::Storage::Slots;
 use CSG::Storage::Slots::Logger;
@@ -52,4 +52,4 @@ __END__
 
 =head1
 
-CSG::Storage::Slots::Slot::Command::update - Update an existing storage slot size
+CSG::Storage::Slot::Command::update - Update an existing storage slot size

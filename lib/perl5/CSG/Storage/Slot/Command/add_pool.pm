@@ -1,6 +1,6 @@
-package CSG::Storage::Slots::Slot::Command::add_pool;
+package CSG::Storage::Slot::Command::add_pool;
 
-use CSG::Storage::Slots::Slot -command;
+use CSG::Storage::Slot -command;
 use CSG::Storage::Slots::DB;
 use CSG::Storage::Slots::Logger;
 
@@ -55,4 +55,4 @@ __END__
 
 =head1
 
-CSG::Storage::Slots::Slot::Command::add_pool - Add a new pool to server slots
+CSG::Storage::Slot::Command::add_pool - Add a new pool to server slots

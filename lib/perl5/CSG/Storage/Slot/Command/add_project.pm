@@ -1,6 +1,6 @@
-package CSG::Storage::Slots::Slot::Command::add_project;
+package CSG::Storage::Slot::Command::add_project;
 
-use CSG::Storage::Slots::Slot -command;
+use CSG::Storage::Slot -command;
 use CSG::Storage::Slots::DB;
 use CSG::Storage::Slots::Logger;
 
@@ -31,4 +31,4 @@ __END__
 
 =head1
 
-CSG::Storage::Slots::Slot::Command::add_project - Add a new project
+CSG::Storage::Slot::Command::add_project - Add a new project

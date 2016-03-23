@@ -1,6 +1,6 @@
-package CSG::Storage::Slots::Slot::Command::find;
+package CSG::Storage::Slot::Command::find;
 
-use CSG::Storage::Slots::Slot -command;
+use CSG::Storage::Slot -command;
 
 use CSG::Storage::Slots;
 use CSG::Storage::Slots::Logger;
@@ -47,4 +47,4 @@ __END__
 
 =head1
 
-CSG::Storage::Slots::Slot::Command::find - Find an existing storage slot path
+CSG::Storage::Slot::Command::find - Find an existing storage slot path

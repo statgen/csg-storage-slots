@@ -1,6 +1,6 @@
-package CSG::Storage::Slots::Slot::Command::new;
+package CSG::Storage::Slot::Command::new;
 
-use CSG::Storage::Slots::Slot -command;
+use CSG::Storage::Slot -command;
 
 use Modern::Perl;
 use Try::Tiny;
@@ -85,4 +85,4 @@ __END__
 
 =head1
 
-CSG::Storage::Slots::Slot::Command::new - Create a new storage slot
+CSG::Storage::Slot::Command::new - Create a new storage slot

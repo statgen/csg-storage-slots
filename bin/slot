@@ -4,7 +4,7 @@ use FindBin qw($Bin);
 use local::lib qq($Bin/../local);
 use lib qq($Bin/../lib/perl5);
 
-use CSG::Storage::Slots::Slot;
+use CSG::Storage::Slot;
 
 $ARGV[0] =~ s/^add-/add_/g;
-CSG::Storage::Slots::Slot->run;
+CSG::Storage::Slot->run;

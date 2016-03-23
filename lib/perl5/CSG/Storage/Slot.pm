@@ -1,4 +1,4 @@
-package CSG::Storage::Slots::Slot;
+package CSG::Storage::Slot;
 
 use App::Cmd::Setup -app;
 

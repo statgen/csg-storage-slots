@@ -1,6 +1,6 @@
-package CSG::Storage::Slots::Slot::Command::collect;
+package CSG::Storage::Slot::Command::collect;
 
-use CSG::Storage::Slots::Slot -command;
+use CSG::Storage::Slot -command;
 use CSG::Storage::Slots::DB;
 use CSG::Storage::Slots::Logger;
 
@@ -47,4 +47,4 @@ __END__
 
 =head1
 
-CSG::Storage::Slots::Slot::Command::collect - Collect disk usage info for a slot storage filesystem
+CSG::Storage::Slot::Command::collect - Collect disk usage info for a slot storage filesystem
