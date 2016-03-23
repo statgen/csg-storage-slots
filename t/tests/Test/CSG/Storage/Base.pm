@@ -29,31 +29,31 @@ sub _startup : Test(startup) {
   diag("Deploying schema to $ENV{SLOTS_DB}"); # TODO - replace %ENV with config lookup or something
   $schema->deploy({add_drop_table => 1});
 
-  my $filesystems = LoadFile(File::Spec->join($self->fixture_path, 'filesystems.yml'));
+  my $pools = LoadFile(File::Spec->join($self->fixture_path, 'pools.yml'));
 
-  for my $filesystem (@{$filesystems}) {
-    diag("Creating type: $filesystem->{type}");
-    my $type = $schema->resultset('Type')->find_or_create({name => $filesystem->{type}});
+  for my $pool (@{$pools}) {
+    diag("Creating type: $pool->{type}");
+    my $type = $schema->resultset('Type')->find_or_create({name => $pool->{type}});
 
-    diag("Creating project: $filesystem->{project}");
-    my $project = $schema->resultset('Project')->find_or_create({name => $filesystem->{project}});
+    diag("Creating project: $pool->{project}");
+    my $project = $schema->resultset('Project')->find_or_create({name => $pool->{project}});
 
-    diag("Creating filesystem: $filesystem->{name}");
-    my $fs = $schema->resultset('Filesystem')->find_or_create(
+    diag("Creating pool: $pool->{name}");
+    my $pool = $schema->resultset('Pool')->find_or_create(
       {
-        name       => $filesystem->{name},
-        hostname   => $filesystem->{hostname},
-        size_used  => $filesystem->{size_used},
-        size_total => $filesystem->{size_total},
-        path       => $filesystem->{path},
+        name       => $pool->{name},
+        hostname   => $pool->{hostname},
+        size_used  => $pool->{size_used},
+        size_total => $pool->{size_total},
+        path       => $pool->{path},
         type_id    => $type->id,
         project_id => $project->id,
       }
     );
 
-    for my $slot (@{$filesystem->{slots}}) {
+    for my $slot (@{$pool->{slots}}) {
       diag("Creating slot: $slot->{name}");
-      $fs->add_to_slots(
+      $pool->add_to_slots(
         {
           name => $slot->{name},
           size => $slot->{size},

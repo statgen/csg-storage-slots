@@ -43,7 +43,7 @@ __PACKAGE__->table("slots");
   is_auto_increment: 1
   is_nullable: 0
 
-=head2 filesystem_id
+=head2 pool_id
 
   data_type: 'integer'
   is_foreign_key: 1
@@ -79,7 +79,7 @@ __PACKAGE__->table("slots");
 __PACKAGE__->add_columns(
   "id",
   { data_type => "integer", is_auto_increment => 1, is_nullable => 0 },
-  "filesystem_id",
+  "pool_id",
   { data_type => "integer", is_foreign_key => 1, is_nullable => 0 },
   "name",
   { data_type => "varchar", is_nullable => 0, size => 255 },
@@ -120,34 +120,34 @@ __PACKAGE__->set_primary_key("id");
 
 =item * L</name>
 
-=item * L</filesystem_id>
+=item * L</pool_id>
 
 =back
 
 =cut
 
-__PACKAGE__->add_unique_constraint("index3", ["name", "filesystem_id"]);
+__PACKAGE__->add_unique_constraint("index3", ["name", "pool_id"]);
 
 =head1 RELATIONS
 
-=head2 filesystem
+=head2 pool
 
 Type: belongs_to
 
-Related object: L<CSG::Storage::Slots::DB::Schema::Result::Filesystem>
+Related object: L<CSG::Storage::Slots::DB::Schema::Result::Pool>
 
 =cut
 
 __PACKAGE__->belongs_to(
-  "filesystem",
-  "CSG::Storage::Slots::DB::Schema::Result::Filesystem",
-  { id => "filesystem_id" },
+  "pool",
+  "CSG::Storage::Slots::DB::Schema::Result::Pool",
+  { id => "pool_id" },
   { is_deferrable => 1, on_delete => "NO ACTION", on_update => "NO ACTION" },
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.07043 @ 2016-03-17 09:10:22
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:D1jEgs7M4AiACjfJ0sroyQ
+# Created by DBIx::Class::Schema::Loader v0.07043 @ 2016-03-23 08:21:32
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:xl80Oxa83bN5B7k6Nqmd4w
 
 
 # You can replace this text with custom code or comments, and it will be preserved on regeneration

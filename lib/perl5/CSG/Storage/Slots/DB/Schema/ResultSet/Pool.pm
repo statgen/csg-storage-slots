@@ -1,4 +1,4 @@
-package CSG::Storage::Slots::DB::Schema::ResultSet::Filesystem;
+package CSG::Storage::Slots::DB::Schema::ResultSet::Pool;
 
 use base qw(DBIx::Class::ResultSet);
 

@@ -27,7 +27,7 @@ sub execute {
   my $schema = CSG::Storage::Slots::DB->new();
   my $logger = CSG::Storage::Slots::Logger->new();
 
-  for my $fs ($schema->resultset('Filesystem')->all()) {
+  for my $fs ($schema->resultset('Pool')->all()) {
     my $path = File::Spec->canonpath(File::Spec->join($opts->{prefix}, $fs->hostname, $fs->path));
 
     unless (-e $path) {

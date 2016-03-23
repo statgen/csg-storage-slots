@@ -28,12 +28,12 @@ around [qw(name project size path)] => sub {
 
   unless ($self->has_record) {
     my $schema = CSG::Storage::Slots::DB->new();
-    my $fs     = $schema->resultset('Filesystem')->next_available($self->{project}, $self->{size});
+    my $pool   = $schema->resultset('Pool')->next_available($self->{project}, $self->{size});
     my $record = $schema->resultset('Slot')->find_or_create(
       {
-        name          => $self->{name},
-        size          => $self->{size},
-        filesystem_id => $fs->id,
+        name    => $self->{name},
+        size    => $self->{size},
+        pool_id => $pool->id,
       }
     );
 
@@ -58,8 +58,8 @@ sub _build_sha1 {
 sub _build_path {
   my ($self) = @_;
 
-  my $hostname = $self->_record->filesystem->hostname;
-  my $fs_path  = $self->_record->filesystem->path;
+  my $hostname = $self->_record->pool->hostname;
+  my $fs_path  = $self->_record->pool->path;
   my $path     = File::Spec->join($hostname, $fs_path, (split(//, $self->sha1))[0 .. 3], $self->name);
 
   return URI->new($path);
@@ -78,7 +78,7 @@ sub find {
       'me.name'      => $params{name},
       'project.name' => $params{project},
     }, {
-      join => {filesystem => 'project'},
+      join => {pool => 'project'},
     }
   )->first;
 
@@ -86,7 +86,7 @@ sub find {
 
   return $class->new(
     name    => $slot->name,
-    project => $slot->filesystem->project->name,
+    project => $slot->pool->project->name,
     size    => $slot->size,
     _record => $slot,
   );

@@ -112,24 +112,24 @@ __PACKAGE__->add_unique_constraint("index2", ["name"]);
 
 =head1 RELATIONS
 
-=head2 filesystems
+=head2 pools
 
 Type: has_many
 
-Related object: L<CSG::Storage::Slots::DB::Schema::Result::Filesystem>
+Related object: L<CSG::Storage::Slots::DB::Schema::Result::Pool>
 
 =cut
 
 __PACKAGE__->has_many(
-  "filesystems",
-  "CSG::Storage::Slots::DB::Schema::Result::Filesystem",
+  "pools",
+  "CSG::Storage::Slots::DB::Schema::Result::Pool",
   { "foreign.type_id" => "self.id" },
   { cascade_copy => 0, cascade_delete => 0 },
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.07043 @ 2016-02-24 13:46:23
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:0W1rAdV4TOqhMKuU5m+/wQ
+# Created by DBIx::Class::Schema::Loader v0.07043 @ 2016-03-23 08:21:32
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:teJOS2BZ2qYXMkZN3XQwkQ
 
 
 # You can replace this text with custom code or comments, and it will be preserved on regeneration
