@@ -59,9 +59,8 @@ sub _build_sha1 {
 sub _build_path {
   my ($self) = @_;
 
-  my $hostname = $self->_record->pool->hostname;
-  my $fs_path  = $self->_record->pool->path;
-  my $path     = File::Spec->join($hostname, $fs_path, (split(//, $self->sha1))[0 .. 3], $self->name);
+  my $pool = $self->_record->pool;
+  my $path = File::Spec->join($pool->hostname, $pool->path, (split(//, $self->sha1))[0 .. 3], $self->name);
 
   return URI->new($path);
 }
