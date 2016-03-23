@@ -55,6 +55,12 @@ __PACKAGE__->table("slots");
   is_nullable: 0
   size: 255
 
+=head2 sha1
+
+  data_type: 'char'
+  is_nullable: 1
+  size: 40
+
 =head2 size
 
   data_type: 'varchar'
@@ -83,6 +89,8 @@ __PACKAGE__->add_columns(
   { data_type => "integer", is_foreign_key => 1, is_nullable => 0 },
   "name",
   { data_type => "varchar", is_nullable => 0, size => 255 },
+  "sha1",
+  { data_type => "char", is_nullable => 1, size => 40 },
   "size",
   { data_type => "varchar", is_nullable => 0, size => 45 },
   "created_at",
@@ -146,8 +154,8 @@ __PACKAGE__->belongs_to(
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.07043 @ 2016-03-23 08:21:32
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:xl80Oxa83bN5B7k6Nqmd4w
+# Created by DBIx::Class::Schema::Loader v0.07043 @ 2016-03-23 08:59:19
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:6e1M73ACXFF6ISK5gc28QQ
 
 
 # You can replace this text with custom code or comments, and it will be preserved on regeneration
