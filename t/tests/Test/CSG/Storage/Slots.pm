@@ -6,6 +6,7 @@ use Test::Exception;
 
 use Modern::Perl;
 use Digest::SHA qw(sha1_hex);
+use Number::Bytes::Human qw(parse_bytes);
 
 use CSG::Storage::Slots;
 use CSG::Storage::Slots::DB;
@@ -22,9 +23,9 @@ sub test_new : Test(5) {
   throws_ok {$self->class->new(name => 'foobar', project => 'proj1')} 'Moose::Exception::AttributeIsRequired',
     'missing size for new()';
 
-  lives_ok {$self->class->new(name => 'foobar', project => 'proj1', size => '100T')} 'all params given for new()';
+  lives_ok {$self->class->new(name => 'foobar', project => 'proj1', size => parse_bytes('100TB'))} 'all params given for new()';
 
-  throws_ok {$self->class->new(name => 'foo', project => 'foo', size => '100T')}
+  throws_ok {$self->class->new(name => 'foo', project => 'foo', size => parse_bytes('100TB'))}
   'Moose::Exception::ValidationFailedForInlineTypeConstraint', 'invalid project name';
 }
 
@@ -34,7 +35,7 @@ sub test_path : Test(2) {
   my $slot = $self->class->new(
     name    => 'foobar',
     project => 'proj1',
-    size    => '300GB',
+    size    => parse_bytes('300GB'),
   );
 
   like($slot->to_string, qr{^foo[1|2]\.localhost/working/slots[1|2]/8/8/4/3/foo}, 'to_string() path matches');
@@ -44,7 +45,7 @@ sub test_path : Test(2) {
 sub test_sha1 : Test(1) {
   my ($self) = @_;
   my $name   = 'foobarbaz';
-  my $slot   = $self->class->new(name => $name, project => 'proj1', size => '200GB');
+  my $slot   = $self->class->new(name => $name, project => 'proj1', size => parse_bytes('200GB'));
 
   is($slot->sha1, sha1_hex($name), 'SHA1 should match');
 }

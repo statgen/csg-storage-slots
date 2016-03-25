@@ -159,4 +159,8 @@ __PACKAGE__->belongs_to(
 
 
 # You can replace this text with custom code or comments, and it will be preserved on regeneration
+sub to_string {
+  my ($self) = @_;
+  return sprintf 'Name: %-10s Project: %-10s Pool: %-10s Size: %s', $self->name, $self->pool->project->name, $self->pool->name, $self->size;
+}
 1;

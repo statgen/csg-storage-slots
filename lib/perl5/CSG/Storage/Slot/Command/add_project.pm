@@ -5,7 +5,7 @@ use CSG::Storage::Slots::DB;
 use CSG::Logger;
 
 sub opt_spec {
-  return (['name=s', 'Project name', {required => 1}],);
+  return (['name|n=s', 'Project name', {required => 1}]);
 }
 
 sub validate_args {

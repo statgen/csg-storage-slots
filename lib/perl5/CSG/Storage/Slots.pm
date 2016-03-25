@@ -73,14 +73,7 @@ sub find {
   my $class  = shift;
   my %params = @_;
   my $schema = CSG::Storage::Slots::DB->new();
-  my $slot   = $schema->resultset('Slot')->search(
-    {
-      'me.name'      => $params{name},
-      'project.name' => $params{project},
-    }, {
-      join => {pool => 'project'},
-    }
-  )->first;
+  my $slot   = $schema->resultset('Slot')->find_slot($params{name}, $params{project});
 
   return unless $slot;
 

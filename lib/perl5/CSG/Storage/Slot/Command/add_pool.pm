@@ -1,20 +1,21 @@
 package CSG::Storage::Slot::Command::add_pool;
 
 use CSG::Storage::Slot -command;
-use CSG::Storage::Slots::DB;
-use CSG::Logger;
 
 use File::Spec;
 use Filesys::DiskUsage qw(du);
 use Number::Bytes::Human qw(parse_bytes);
 
+use CSG::Storage::Slots::DB;
+use CSG::Logger;
+
 sub opt_spec {
   return (
-    ['name=s',     'Descriptive name for the pool',                                       {required => 1}],
-    ['hostname=s', 'Hostname that the pool resides on (for nfs based pools)',             {required => 1}],
-    ['path=s',     'Path where slots will be stored',                                     {required => 1}],
-    ['size=s',     'Total space available for slots in human readable form (i.e. 400Tb)', {required => 1}],
-    ['project=s',  'Project this this pool belongs to',                                   {required => 1}],
+    ['name|n=s',     'Descriptive name for the pool',                                       {required => 1}],
+    ['hostname|w=s', 'Hostname that the pool resides on (for nfs based pools)',             {required => 1}],
+    ['path|h=s',     'Path where slots will be stored',                                     {required => 1}],
+    ['size|s=s',     'Total space available for slots in human readable form (i.e. 400Tb)', {required => 1}],
+    ['project|r=s',  'Project this this pool belongs to',                                   {required => 1}],
   );
 }
 

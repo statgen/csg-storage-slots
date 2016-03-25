@@ -14,8 +14,8 @@ subtype 'ValidProject',
   message {"Project name, $_, is not a valid project"};
 
 subtype 'ValidSlotSize',
-  as 'Str',
-  where { 1; }, # TODO - not sure how i want to validate this yet
+  as 'Int',
+  where { $_ =~ /^\d+$/ and $_ > 0 },
   message {"Slot size, $_, is not valid"};
 
 subtype 'ValidSlotName',

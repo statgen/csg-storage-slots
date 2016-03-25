@@ -3,10 +3,7 @@ package CSG::Storage::Sample;
 use autodie qw(:all);
 use Modern::Perl;
 use Moose;
-use File::Copy;
-use File::Path qw(make_path);
 use File::Spec;
-use Path::Class;
 use overload '""' => sub {shift->to_string};
 
 use CSG::Storage::Slots;
@@ -17,15 +14,14 @@ our $VERSION = '0.1';
 has 'filename'  => (is => 'ro', isa => 'ValidFile',       required => 1);
 has 'sample_id' => (is => 'ro', isa => 'Str',             required => 1);
 has 'project'   => (is => 'ro', isa => 'Str',             required => 1);
-has 'prefix'    => (is => 'ro', isa => 'ValidPrefixPath', required => 1);
+has 'prefix'    => (is => 'ro', isa => 'ValidPrefixPath', default  => sub {'/net'});
 has 'factor'    => (is => 'ro', isa => 'Int',             default  => sub {4});
-
-has 'size'          => (is => 'ro', isa => 'Int', lazy => 1, builder => '_build_size');
-has 'path'          => (is => 'ro', isa => 'Str', lazy => 1, builder => '_build_path');
-has 'incoming_path' => (is => 'ro', isa => 'Str', lazy => 1, builder => '_build_incoming_path');
+has 'size'      => (is => 'ro', isa => 'Int',             lazy     => 1, builder => '_build_size');
+has 'path'      => (is => 'ro', isa => 'Str',             lazy     => 1, builder => '_build_path');
 
 sub _build_size {
-  return (stat(shift->filename))[7];
+  my ($self) = @_;
+  return (stat($self->filename))[7] * $self->factor;
 }
 
 sub _build_path {
@@ -33,53 +29,15 @@ sub _build_path {
 
   my $slot = CSG::Storage::Slots->find_or_create(
     name    => $self->sample_id,
-    size    => $self->allocate_size,
+    size    => $self->size,
     project => $self->project,
   );
 
   return File::Spec->join($self->prefix, $slot->path);
 }
 
-sub _build_incoming_path {
-  my ($self) = @_;
-
-  my $dir = Path::Class::Dir->new($self->filename);
-  my $name = ($dir->components)[-1];
-
-  return File::Spec->join($self->path, 'incoming', $name);
-}
-
-sub allocate_size {
-  my ($self) = @_;
-  return $self->size * $self->factor;
-}
-
-sub stage {
-  my ($self) = @_;
-
-  my @skel_dirs = map {File::Spec->join($self->path, $_)} (qw(incoming backup mapping logs run info));
-  make_path(@skel_dirs, {error => \my $err});
-
-  if (@{$err}) {
-    my $errstr;
-    for (@{$err}) {
-      my ($key, $value) = %{$_};
-      $errstr = $value if $key eq '';
-    }
-
-    CSG::Storage::Slots::Exceptions::Sample::FailedSkeletonDirectory->throw(error => $errstr);
-  }
-
-  unless (copy($self->filename, $skel_dirs[0])) {
-    CSG::Storage::Slots::Exceptions::Sample::FailedCopy->throw(error => $!);
-  }
-
-  return;
-}
-
 sub to_string {
-  my ($self) = @_;
-  return $self->path;
+  return shift->path;
 }
 
 no Moose;
@@ -106,9 +64,6 @@ This documentation refers to CSG::Storage::Slots version 0.1
       sample_id => 'NWD123456',
       project   => 'topmed',
     );
-
-    # Create storage structure
-    $sample->stage();
 
     # Where does this sample live
     say $sample->path();

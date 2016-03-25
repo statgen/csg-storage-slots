@@ -4,55 +4,36 @@ use CSG::Storage::Slot -command;
 
 use Modern::Perl;
 use Try::Tiny;
+use Number::Bytes::Human qw(parse_bytes);
 
-use CSG::Storage::Sample;
 use CSG::Logger;
+use CSG::Storage::Slots;
 
 sub opt_spec {
   return (
-    ['name=s',    'Name for the slot'],
-    ['file=s',    'File to store in the slots incoming directory'],
-    ['project=s', 'Project name for slot filesystems'],
-    ['prefix=s',  'why do we have this?'],
+    ['name|n=s',    'Name for the slot',                                        {required => 1}],
+    ['project|p=s', 'Project name for slot filesystems',                        {required => 1}],
+    ['size|s=s',    'Disk space required in human readable format (i.e. 400G)', {required => 1}],
   );
 }
 
 sub validate_args {
   my ($self, $opts, $args) = @_;
-
-  unless ($opts->{name}) {
-    $self->usage_error('Name is required');
-  }
-
-  unless ($opts->{file}) {
-    $self->usage_error('File is required');
-  }
-
-  unless ($opts->{project}) {
-    $self->usage_error('Project name is required');
-  }
-
-  unless ($opts->{prefix}) {
-    $self->usage_error('Prefix is required...for now');
-  }
 }
 
 sub execute {
   my ($self, $opts, $args) = @_;
 
-  my $logger = CSG::Logger->new();
   my $rc     = 0;
-  my $sample = undef;
+  my $logger = CSG::Logger->new();
+  my $slot   = undef;
 
   try {
-    $sample = CSG::Storage::Sample->new(
-      sample_id => $opts->{name},
-      filename  => $opts->{file},
-      project   => $opts->{project},
-      prefix    => $opts->{prefix},
+    $slot = CSG::Storage::Slots->new(
+      name    => $opts->{name},
+      project => $opts->{project},
+      size    => parse_bytes($opts->{size}),
     );
-
-    $sample->stage();
   }
   catch {
     if (not ref $_) {
@@ -70,9 +51,10 @@ sub execute {
     }
 
     $rc = 1;
-  } finally {
+  }
+  finally {
     unless (@_) {
-      $logger->info($sample->path);
+      $logger->info($slot->to_string);
     }
   };
 

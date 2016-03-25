@@ -31,33 +31,10 @@ sub startup : Test(startup => 2) {
 
     push @{$self->{stash}->{samples}}, $sample;
   }
-
 }
 
-sub test_allocate_size : Test(no_plan) {
-  my ($self) = @_;
-
-}
-
-sub test_stage : Test(16) {
-  my ($self) = @_;
-
-  for my $sample (@{$self->{stash}->{samples}}) {
-    $sample->stage();
-
-    ok(-e File::Spec->join($sample->path, 'incoming'), 'Skeleton incoming directory was created');
-    ok(-e File::Spec->join($sample->path, 'backup'),   'Skeleton backup directory was created');
-    ok(-e File::Spec->join($sample->path, 'mapping'),  'Skeleton mapping directory was created');
-    ok(-e File::Spec->join($sample->path, 'logs'),     'Skeleton logs directory was created');
-    ok(-e File::Spec->join($sample->path, 'run'),      'Skeleton run directory was created');
-    ok(-e File::Spec->join($sample->path, 'info'),     'Skeleton info directory was created');
-    ok(-e $sample->incoming_path, 'Sample exists in incoming directory');
-
-    my $sample_stat   = File::Stat->new($sample->filename);
-    my $incoming_stat = File::Stat->new($sample->incoming_path);
-
-    is($sample_stat->size, $incoming_stat->size, 'original sample and copy in incoming match');
-  }
+sub test_path : Test(no_plan) {
+  local $TODO = 'Implement tests';
 }
 
 1;
