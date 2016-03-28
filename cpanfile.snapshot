@@ -2455,6 +2455,16 @@ DISTRIBUTIONS
       Pod::Text 4
       Test::More 0.6
       blib 0
+  Readonly-2.01
+    pathname: S/SA/SANKO/Readonly-2.01.tar.gz
+    provides:
+      Readonly 2.01
+      Readonly::Array undef
+      Readonly::Hash undef
+      Readonly::Scalar undef
+    requirements:
+      Module::Build::Tiny 0.035
+      perl v5.6.0
   Role-Tiny-2.000001
     pathname: H/HA/HAARG/Role-Tiny-2.000001.tar.gz
     provides:

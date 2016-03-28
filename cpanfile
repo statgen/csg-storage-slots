@@ -15,6 +15,7 @@ requires 'Filesys::DiskUsage';
 requires 'File::Spec';
 requires 'Number::Bytes::Human';
 requires 'Module::Load';
+requires 'Readonly';
 
 on 'test' => sub {
   requires 'SQL::Translator';
