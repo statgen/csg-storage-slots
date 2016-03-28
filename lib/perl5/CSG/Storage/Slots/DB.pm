@@ -2,12 +2,11 @@ package CSG::Storage::Slots::DB;
 
 use base qw(CSG::Storage::Slots::DB::Schema);
 
+use CSG::Storage::Config;
+
 sub new {
-  return __PACKAGE__->connect(
-    qq{dbi:mysql:database=$ENV{SLOTS_DB};host=$ENV{SLOTS_DB_HOST};port=3306},
-    $ENV{SLOTS_DB_USER},
-    $ENV{SLOTS_DB_PASS}
-  );
+  my $conf = CSG::Storage::Config->new();
+  return __PACKAGE__->connect($conf->dsn, $conf->db_user, $conf->db_pass);
 }
 
 1;

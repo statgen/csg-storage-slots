@@ -13,7 +13,7 @@ services:
 env:
   global:
     - SLOTS_DB="test"
-    - SLOTS_HOST="127.0.0.1"
+    - SLOTS_DB_HOST="127.0.0.1"
     - SLOTS_DB_USER="travis"
     - SLOTS_DB_PASS=""
 notifications:

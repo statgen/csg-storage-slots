@@ -16,6 +16,7 @@ requires 'File::Spec';
 requires 'Number::Bytes::Human';
 requires 'Module::Load';
 requires 'Readonly';
+requires 'Config::Tiny';
 
 on 'test' => sub {
   requires 'SQL::Translator';
