@@ -1,32 +1,17 @@
 package CSG::Storage::Slot::Command::update;
 
 use CSG::Storage::Slot -command;
-
 use CSG::Storage::Slots;
 use CSG::Logger;
 
+use Modern::Perl;
+
 sub opt_spec {
   return (
-    ['name=s',    'Slot name'],
-    ['project=s', 'Project name'],
-    ['size=s',    'New size for slot'],
+    ['name|n=s',    'Slot name',         {required => 1}],
+    ['project|p=s', 'Project name',      {required => 1}],
+    ['size|s=s',    'New size for slot', {required => 1}],
   );
-}
-
-sub validate_args {
-  my ($self, $opts, $args) = @_;
-
-  unless ($opts->{name}) {
-    $self->usage_error('Name is required');
-  }
-
-  unless ($opts->{project}) {
-    $self->usage_error('Project name is required');
-  }
-
-  unless ($opts->{size}) {
-    $self->usage_error('Size is required');
-  }
 }
 
 sub execute {

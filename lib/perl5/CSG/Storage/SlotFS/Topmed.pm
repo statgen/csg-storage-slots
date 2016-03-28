@@ -9,9 +9,17 @@ use File::Copy;
 use File::Path qw(make_path);
 use Path::Class;
 
-with 'CSG::Storage::SlotFS::Roles::Slot';
+our $VERSION = '0.1';
 
 Readonly::Array my @PATHS => (qw(incoming backup mapping logs run info));
+
+has 'size' => (is => 'ro', isa => 'Int', lazy => 1, builder => '_build_size');
+has 'factor' => (is => 'ro', isa => 'Int', default => sub {4});
+
+sub _build_size {
+  my ($self) = @_;
+  return (stat($self->filename))[7] * $self->factor;
+}
 
 for my $path (@PATHS) {
   has "${path}_path" => (
@@ -44,13 +52,82 @@ sub initialize {
   return;
 }
 
-sub list_paths {
-  return join("\n", @PATHS);
+sub to_string {
+  return shift->slot->path;
 }
 
-1;
+with qw(
+  CSG::Storage::SlotFS::Roles::Sample
+  CSG::Storage::SlotFS::Roles::Slot
+  );
 
 no Moose;
 __PACKAGE__->meta->make_immutable;
 
 1;
+
+__END__
+
+
+=head1 NAME
+
+CSG::Storage::SlotFS::Topmed
+
+=head1 VERSION
+
+This documentation refers to CSG::Storage::SlotFS::Topmed version 0.1
+
+=head1 SYNOPSIS
+
+    use CSG::Storage::SlotFS::Topmed;
+
+    my $topmed = CSG::Storage::SlotFS::Topmed->new(
+      filename => 'foo.bam',
+      name     => 'NWD123456',
+      project  => 'topmed',
+    );
+
+    $topmed->initialize(); # builds the topmed sample directory structure
+
+    say $topmed->incoming_path; # path to the incoming directory for the sample
+
+=head1 DESCRIPTION
+
+
+
+=head1 DIAGNOSTICS
+
+
+
+=head1 CONFIGURATION AND ENVIRONMENT
+
+
+
+=head1 DEPENDENCIES
+
+
+
+=head1 INCOMPATIBILITIES
+
+
+
+=head1 BUGS AND LIMITATIONS
+
+There are no known bugs in this module.
+Please report problems to Chris Scheller <schelcj@umich.edu>
+Patches are welcome.
+
+=head1 AUTHOR
+
+Chris Scheller <schelcj@umich.edu>
+
+=head1 LICENSE AND COPYRIGHT
+
+Copyright (c) 2016 Regents of the University of Michigan. All rights reserved.
+
+This module is free software; you can redistribute it and/or
+modify it under the same terms as Perl itself. See L<perlartistic>.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.

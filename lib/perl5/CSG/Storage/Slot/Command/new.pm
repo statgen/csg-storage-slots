@@ -1,13 +1,12 @@
 package CSG::Storage::Slot::Command::new;
 
 use CSG::Storage::Slot -command;
+use CSG::Storage::Slots;
+use CSG::Logger;
 
 use Modern::Perl;
 use Try::Tiny;
 use Number::Bytes::Human qw(parse_bytes);
-
-use CSG::Logger;
-use CSG::Storage::Slots;
 
 sub opt_spec {
   return (
@@ -38,10 +37,6 @@ sub execute {
   catch {
     if (not ref $_) {
       $logger->error($_);
-    } elsif ($_->isa('CSG::Storage::Slots::Exceptions::Sample::FailedSkeletonDirectory')) {
-      $logger->error($_->error);
-    } elsif ($_->isa('CSG::Storage::Slots::Exceptions::Sample::FailedCopy')) {
-      $logger->error($_->error);
     } else {
       if ($_->isa('Exception::Class')) {
         $logger->error($_->error);

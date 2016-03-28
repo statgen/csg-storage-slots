@@ -2,6 +2,7 @@ package CSG::Storage::Slot::Command::list_slots;
 
 use CSG::Storage::Slot -command;
 use CSG::Storage::Slots::DB;
+
 use Modern::Perl;
 
 sub opt_spec {

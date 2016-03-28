@@ -14,6 +14,7 @@ requires 'Try::Tiny';
 requires 'Filesys::DiskUsage';
 requires 'File::Spec';
 requires 'Number::Bytes::Human';
+requires 'Module::Load';
 
 on 'test' => sub {
   requires 'SQL::Translator';

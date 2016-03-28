@@ -109,7 +109,7 @@ This documentation refers to CSG::Storage::Slots version 0.1
 
     use CSG::Storage::Slots;
 
-    my $slot = CSG::Storage::Slots->new(name => 'foo', project => 'bar', size => '200G');
+    my $slot = CSG::Storage::Slots->new(name => 'foo', project => 'bar', size => '2000000000');
 
     say $slot->path;
 

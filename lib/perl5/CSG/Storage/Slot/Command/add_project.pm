@@ -2,7 +2,8 @@ package CSG::Storage::Slot::Command::add_project;
 
 use CSG::Storage::Slot -command;
 use CSG::Storage::Slots::DB;
-use CSG::Logger;
+
+use Modern::Perl;
 
 sub opt_spec {
   return (['name|n=s', 'Project name', {required => 1}]);
@@ -22,7 +23,6 @@ sub execute {
 
   my $schema = CSG::Storage::Slots::DB->new();
   $schema->resultset('Project')->create({name => $opts->{name}});
-  exit 1;
 }
 
 1;

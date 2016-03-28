@@ -2,19 +2,18 @@ package CSG::Storage::Slot::Command::add_pool;
 
 use CSG::Storage::Slot -command;
 
+use Modern::Perl;
 use File::Spec;
-use Filesys::DiskUsage qw(du);
 use Number::Bytes::Human qw(parse_bytes);
 
 use CSG::Storage::Slots::DB;
-use CSG::Logger;
 
 sub opt_spec {
   return (
     ['name|n=s',     'Descriptive name for the pool',                                       {required => 1}],
     ['hostname|w=s', 'Hostname that the pool resides on (for nfs based pools)',             {required => 1}],
     ['path|h=s',     'Path where slots will be stored',                                     {required => 1}],
-    ['size|s=s',     'Total space available for slots in human readable form (i.e. 400Tb)', {required => 1}],
+    ['size|s=s',     'Total space available for slots in human readable form (i.e. 400TB)', {required => 1}],
     ['project|r=s',  'Project this this pool belongs to',                                   {required => 1}],
   );
 }
@@ -36,7 +35,6 @@ sub execute {
   my ($self, $opts, $args) = @_;
 
   my $schema  = CSG::Storage::Slots::DB->new();
-  my $logger  = CSG::Logger->new();
   my $type    = $schema->resultset('Type')->find({name => 'nfs'});                 # XXX - only type right now
   my $project = $schema->resultset('Project')->find({name => $opts->{project}});
   my $pool    = $project->add_to_pools(

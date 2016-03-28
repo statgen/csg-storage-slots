@@ -1,4 +1,4 @@
-package Test::CSG::Storage::Sample;
+package Test::CSG::Storage::SlotFS::Topmed;
 
 use base qw(Test::CSG::Storage::Base);
 use Test::More;
@@ -7,10 +7,10 @@ use Modern::Perl;
 use File::Stat;
 use YAML qw(LoadFile);
 
-use CSG::Storage::Sample;
+use CSG::Storage::SlotFS::Topmed;
 
 sub class {
-  return 'CSG::Storage::Sample';
+  return 'CSG::Storage::SlotFS::Topmed';
 }
 
 sub startup : Test(startup => 2) {
@@ -20,10 +20,10 @@ sub startup : Test(startup => 2) {
 
   for my $fixture (@{$fixtures}) {
     my $sample = $self->class->new(
-      filename  => File::Spec->join($self->fixture_path, 'samples', $fixture->{filename}),
-      sample_id => $fixture->{sample_id},
-      project   => $fixture->{project},
-      prefix    => $self->prefix,
+      filename => File::Spec->join($self->fixture_path, 'samples', $fixture->{filename}),
+      name     => $fixture->{sample_id},
+      project  => $fixture->{project},
+      prefix   => $fixture->{prefix},
     );
 
     isa_ok($sample, $self->class);
@@ -34,7 +34,11 @@ sub startup : Test(startup => 2) {
 }
 
 sub test_path : Test(no_plan) {
-  local $TODO = 'Implement tests';
+  local $TODO = 'not implemented yet';
+}
+
+sub test_initialize : Test(no_plan) {
+  local $TODO = 'not implemented yet';
 }
 
 1;

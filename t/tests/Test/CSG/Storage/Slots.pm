@@ -9,7 +9,6 @@ use Digest::SHA qw(sha1_hex);
 use Number::Bytes::Human qw(parse_bytes);
 
 use CSG::Storage::Slots;
-use CSG::Storage::Slots::DB;
 
 sub class {
   return 'CSG::Storage::Slots';

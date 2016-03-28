@@ -4,6 +4,7 @@ use CSG::Storage::Slot -command;
 use CSG::Storage::Slots::DB;
 use CSG::Logger;
 
+use Modern::Perl;
 use File::Spec;
 use Filesys::DiskUsage qw(du);
 
@@ -24,11 +25,12 @@ sub validate_args {
 sub execute {
   my ($self, $opts, $args) = @_;
 
+  my $prefix = $opts->{prefix} // '/net';
   my $schema = CSG::Storage::Slots::DB->new();
   my $logger = CSG::Logger->new();
 
   for my $fs ($schema->resultset('Pool')->all()) {
-    my $path = File::Spec->canonpath(File::Spec->join($opts->{prefix}, $fs->hostname, $fs->path));
+    my $path = File::Spec->canonpath(File::Spec->join($prefix, $fs->hostname, $fs->path));
 
     unless (-e $path) {
       $logger->error("path, $path, does not exist");
