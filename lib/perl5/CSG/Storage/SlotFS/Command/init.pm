@@ -4,6 +4,7 @@ use CSG::Storage::SlotFS -command;
 
 use Modern::Perl;
 use Module::Load;
+use Try::Tiny;
 
 use CSG::Logger;
 
@@ -12,7 +13,16 @@ sub opt_spec {
     ['project|p=s',  'Project name the slot belongs to',  {required => 1}],
     ['name|n=s',     'Name of the slot to initialize',    {required => 1}],
     ['filename|f=s', 'Full path to sample (bam or cram)', {required => 1}],
+    ['prefix|=s',    'Optional path prefix (i.e. /tmp)'],
   );
+}
+
+sub validate_args {
+  my ($self, $opts, $args) = @_;
+
+  if ($opts->{prefix} and not -e $opts->{prefix}) {
+    $self->usage_error('Prefix must exist');
+  }
 }
 
 sub execute {
@@ -26,17 +36,22 @@ sub execute {
   try {
     load $class;
 
-    $topmed = $class->new(
+    my %params = (
       project  => $opts->{project},
       name     => $opts->{name},
       filename => $opts->{filename},
     );
 
+    if ($opts->{prefix}) {
+      $params{prefix} = $opts->{prefix};
+    }
+
+    $topmed = $class->new(%params);
     $topmed->initialize;
   }
   catch {
     if (not ref $_) {
-      $logger->error($_);
+      $logger->error('Unknown error occured');
     } elsif ($_->isa('CSG::Storage::Slots::Exceptions::Sample::FailedSkeletonDirectory')) {
       $logger->error($_->error);
     } else {
@@ -51,7 +66,7 @@ sub execute {
   }
   finally {
     unless (@_) {
-      say $logger->info($topmed->path);
+      $logger->info($topmed->to_string);
     }
   };
 

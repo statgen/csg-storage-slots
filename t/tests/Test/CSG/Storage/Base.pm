@@ -9,6 +9,7 @@ use File::Spec;
 use File::Temp qw(tempdir);
 use YAML qw(LoadFile);
 
+use CSG::Storage::Config;
 use CSG::Storage::Slots::DB;
 
 my $PREFIX = tempdir();
@@ -24,9 +25,10 @@ sub prefix {
 sub _startup : Test(startup) {
   my ($self) = @_;
 
+  my $config = CSG::Storage::Config->new();
   my $schema = CSG::Storage::Slots::DB->new();
 
-  diag("Deploying schema to $ENV{SLOTS_DB}"); # TODO - replace %ENV with config lookup or something
+  diag('Deploying schema to ' . $config->db);
   $schema->deploy({add_drop_table => 1});
 
   my $pools = LoadFile(File::Spec->join($self->fixture_path, 'pools.yml'));

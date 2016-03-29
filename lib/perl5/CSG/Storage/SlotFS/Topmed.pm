@@ -13,7 +13,7 @@ our $VERSION = '0.1';
 
 Readonly::Array my @PATHS => (qw(incoming backup mapping logs run info));
 
-has 'size' => (is => 'ro', isa => 'Int', lazy => 1, builder => '_build_size');
+has 'size'   => (is => 'ro', isa => 'Int', lazy => 1, builder => '_build_size');
 has 'factor' => (is => 'ro', isa => 'Int', default => sub {4});
 
 sub _build_size {
@@ -53,7 +53,7 @@ sub initialize {
 }
 
 sub to_string {
-  return shift->slot->path;
+  return shift->slot->to_string;
 }
 
 with qw(

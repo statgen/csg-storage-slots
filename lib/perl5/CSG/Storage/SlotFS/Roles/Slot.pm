@@ -9,7 +9,7 @@ use File::Spec;
 use CSG::Storage::Slots;
 use CSG::Storage::Types;
 
-requires 'size';
+requires qw(size to_string);
 
 has 'name'    => (is => 'ro', isa => 'Str',             required => 1);
 has 'project' => (is => 'ro', isa => 'Str',             required => 1);

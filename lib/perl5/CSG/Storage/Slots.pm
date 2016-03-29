@@ -3,7 +3,6 @@ package CSG::Storage::Slots;
 use Modern::Perl;
 use Moose;
 use File::Spec;
-use URI;
 use Digest::SHA qw(sha1_hex);
 use overload '""' => sub {shift->to_string};
 
@@ -18,7 +17,7 @@ has 'project' => (is => 'ro', isa => 'ValidProject',  required => 1);
 has 'size'    => (is => 'rw', isa => 'ValidSlotSize', required => 1, trigger => \&_set_size);
 
 has 'sha1' => (is => 'ro', isa => 'Str', lazy => 1, builder => '_build_sha1');
-has 'path' => (is => 'ro', isa => 'URI', lazy => 1, builder => '_build_path');
+has 'path' => (is => 'ro', isa => 'Str', lazy => 1, builder => '_build_path');
 
 has '_record' => (is => 'rw', isa => __PACKAGE__ . '::DB::Schema::Result::Slot', predicate => 'has_record');
 
@@ -58,15 +57,12 @@ sub _build_sha1 {
 
 sub _build_path {
   my ($self) = @_;
-
   my $pool = $self->_record->pool;
-  my $path = File::Spec->join($pool->hostname, $pool->path, (split(//, $self->sha1))[0 .. 3], $self->name);
-
-  return URI->new($path);
+  return File::Spec->join($pool->hostname, $pool->path, (split(//, $self->sha1))[0 .. 3], $self->name);
 }
 
 sub to_string {
-  return shift->path->as_string;
+  return shift->path;
 }
 
 sub find {

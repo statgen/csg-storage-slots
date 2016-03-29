@@ -1,7 +1,6 @@
 requires 'local::lib';
 requires 'Modern::Perl';
 requires 'Moose';
-requires 'URI';
 requires 'DBIx::Class::Schema::Loader';
 requires 'Exception::Class';
 requires 'DateTime';
