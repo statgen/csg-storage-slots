@@ -53,7 +53,7 @@ sub initialize {
 }
 
 sub to_string {
-  return shift->slot->to_string;
+  return shift->path;
 }
 
 with qw(
