@@ -5,6 +5,8 @@ use CSG::Storage::SlotFS -command;
 use Modern::Perl;
 use Module::Load;
 
+use CSG::Logger;
+
 sub opt_spec {
   return (
     ['project|p=s',  'Project name the slot belongs to',  {required => 1}],
