@@ -31,13 +31,12 @@ sub execute {
   my $rc     = 0;
   my $logger = CSG::Logger->new();
   my $class  = 'CSG::Storage::SlotFS::' . ucfirst(lc($opts->{project}));
-  my $topmed = undef;
+  my $slot   = undef;
 
   try {
     load $class;
 
     my %params = (
-      project  => $opts->{project},
       name     => $opts->{name},
       filename => $opts->{filename},
     );
@@ -46,8 +45,8 @@ sub execute {
       $params{prefix} = $opts->{prefix};
     }
 
-    $topmed = $class->new(%params);
-    $topmed->initialize;
+    $slot = $class->new(%params);
+    $slot->initialize;
   }
   catch {
     if (not ref $_) {
@@ -66,7 +65,7 @@ sub execute {
   }
   finally {
     unless (@_) {
-      $logger->info($topmed->to_string);
+      $logger->info($slot->to_string);
     }
   };
 

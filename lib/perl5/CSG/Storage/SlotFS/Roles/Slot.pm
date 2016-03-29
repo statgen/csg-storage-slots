@@ -9,10 +9,9 @@ use File::Spec;
 use CSG::Storage::Slots;
 use CSG::Storage::Types;
 
-requires qw(size to_string);
+requires qw(size to_string project);
 
 has 'name'    => (is => 'ro', isa => 'Str',             required => 1);
-has 'project' => (is => 'ro', isa => 'Str',             required => 1);
 has 'prefix'  => (is => 'ro', isa => 'ValidPrefixPath', default  => sub {'/net'});
 
 has 'path' => (is => 'ro', isa => 'Str', lazy => 1, builder => '_build_path');

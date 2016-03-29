@@ -5,19 +5,20 @@ use Moose;
 
 use Modern::Perl;
 use Readonly;
-use File::Copy;
 use File::Path qw(make_path);
-use Path::Class;
 
 our $VERSION = '0.1';
 
-Readonly::Array my @PATHS => (qw(incoming backup mapping logs run info));
+Readonly::Scalar my $PROJECT => 'topmed';
+Readonly::Array my @PATHS    => (qw(incoming backup mapping logs run info));
 
-has 'size'   => (is => 'ro', isa => 'Int', lazy => 1, builder => '_build_size');
-has 'factor' => (is => 'ro', isa => 'Int', default => sub {4});
+has 'size'    => (is => 'ro', isa => 'Int', lazy => 1, builder => '_build_size');
+has 'factor'  => (is => 'ro', isa => 'Int', default => sub {4});
+has 'project' => (is => 'ro', isa => 'Str', default => sub {$PROJECT});
 
 sub _build_size {
   my ($self) = @_;
+  return 0 unless $self->has_filename;
   return (stat($self->filename))[7] * $self->factor;
 }
 
@@ -84,7 +85,6 @@ This documentation refers to CSG::Storage::SlotFS::Topmed version 0.1
     my $topmed = CSG::Storage::SlotFS::Topmed->new(
       filename => 'foo.bam',
       name     => 'NWD123456',
-      project  => 'topmed',
     );
 
     $topmed->initialize(); # builds the topmed sample directory structure
