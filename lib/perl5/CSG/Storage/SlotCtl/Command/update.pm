@@ -1,7 +1,6 @@
-package CSG::Storage::Slot::Command::find;
+package CSG::Storage::SlotCtl::Command::update;
 
-use CSG::Storage::Slot -command;
-
+use CSG::Storage::SlotCtl -command;
 use CSG::Storage::Slots;
 use CSG::Logger;
 
@@ -9,8 +8,9 @@ use Modern::Perl;
 
 sub opt_spec {
   return (
-    ['name|n=s',    'Slot name',    {required=>1}],
-    ['project|p=s', 'Project name', {required=>1}],
+    ['name|n=s',    'Slot name',         {required => 1}],
+    ['project|p=s', 'Project name',      {required => 1}],
+    ['size|s=s',    'New size for slot', {required => 1}],
   );
 }
 
@@ -22,7 +22,7 @@ sub execute {
   my $slot   = CSG::Storage::Slots->find(name => $opts->{name}, project => $opts->{project});
 
   if ($slot) {
-    $logger->info($slot->to_string);
+    $slot->size($opts->{size});
   } else {
     $logger->error('slot not found');
     $rc = 1;
@@ -37,4 +37,4 @@ __END__
 
 =head1
 
-CSG::Storage::Slot::Command::find - Find an existing storage slot path
+CSG::Storage::SlotCtl::Command::update - Update an existing storage slot size

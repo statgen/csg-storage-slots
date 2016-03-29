@@ -1,6 +1,6 @@
-package CSG::Storage::Slot::Command::new;
+package CSG::Storage::SlotCtl::Command::new;
 
-use CSG::Storage::Slot -command;
+use CSG::Storage::SlotCtl -command;
 use CSG::Storage::Slots;
 use CSG::Logger;
 
@@ -62,4 +62,4 @@ __END__
 
 =head1
 
-CSG::Storage::Slot::Command::new - Create a new storage slot
+CSG::Storage::SlotCtl::Command::new - Create a new storage slot

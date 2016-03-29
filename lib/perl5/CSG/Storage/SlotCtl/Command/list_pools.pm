@@ -1,6 +1,6 @@
-package CSG::Storage::Slot::Command::list_pools;
+package CSG::Storage::SlotCtl::Command::list_pools;
 
-use CSG::Storage::Slot -command;
+use CSG::Storage::SlotCtl -command;
 use CSG::Storage::Slots::DB;
 
 use Modern::Perl;
@@ -27,4 +27,4 @@ __END__
 
 =head1
 
-CSG::Storage::Slot::Command::list_pools - List all defined pools
+CSG::Storage::SlotCtl::Command::list_pools - List all defined pools

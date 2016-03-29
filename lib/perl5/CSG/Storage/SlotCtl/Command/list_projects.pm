@@ -1,6 +1,6 @@
-package CSG::Storage::Slot::Command::list_projects;
+package CSG::Storage::SlotCtl::Command::list_projects;
 
-use CSG::Storage::Slot -command;
+use CSG::Storage::SlotCtl -command;
 use CSG::Storage::Slots::DB;
 
 use Modern::Perl;
@@ -20,4 +20,4 @@ __END__
 
 =head1
 
-CSG::Storage::Slot::Command::list_projects - List all defined projects
+CSG::Storage::SlotCtl::Command::list_projects - List all defined projects

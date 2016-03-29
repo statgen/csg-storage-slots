@@ -1,6 +1,6 @@
-package CSG::Storage::Slot::Command::list_slots;
+package CSG::Storage::SlotCtl::Command::list_slots;
 
-use CSG::Storage::Slot -command;
+use CSG::Storage::SlotCtl -command;
 use CSG::Storage::Slots::DB;
 
 use Modern::Perl;
@@ -48,4 +48,4 @@ __END__
 
 =head1
 
-CSG::Storage::Slot::Command::list_slots - List slots for a project or all slots
+CSG::Storage::SlotCtl::Command::list_slots - List slots for a project or all slots

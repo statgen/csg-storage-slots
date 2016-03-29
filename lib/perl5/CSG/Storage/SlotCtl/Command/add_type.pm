@@ -1,6 +1,6 @@
-package CSG::Storage::Slot::Command::add_type;
+package CSG::Storage::SlotCtl::Command::add_type;
 
-use CSG::Storage::Slot -command;
+use CSG::Storage::SlotCtl -command;
 
 use Modern::Perl;
 
@@ -27,3 +27,9 @@ sub execute {
 }
 
 1;
+
+__END__
+
+=head1
+
+CSG::Storage::SlotCtl::Command::add_type - Add a new pool type

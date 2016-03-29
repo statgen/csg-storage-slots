@@ -1,6 +1,6 @@
-package CSG::Storage::Slot::Command::add_pool;
+package CSG::Storage::SlotCtl::Command::add_pool;
 
-use CSG::Storage::Slot -command;
+use CSG::Storage::SlotCtl -command;
 
 use Modern::Perl;
 use File::Spec;
@@ -54,4 +54,4 @@ __END__
 
 =head1
 
-CSG::Storage::Slot::Command::add_pool - Add a new pool to server slots
+CSG::Storage::SlotCtl::Command::add_pool - Add a new pool to server slots

@@ -1,6 +1,6 @@
-package CSG::Storage::Slot::Command::add_project;
+package CSG::Storage::SlotCtl::Command::add_project;
 
-use CSG::Storage::Slot -command;
+use CSG::Storage::SlotCtl -command;
 use CSG::Storage::Slots::DB;
 
 use Modern::Perl;
@@ -31,4 +31,4 @@ __END__
 
 =head1
 
-CSG::Storage::Slot::Command::add_project - Add a new project
+CSG::Storage::SlotCtl::Command::add_project - Add a new project

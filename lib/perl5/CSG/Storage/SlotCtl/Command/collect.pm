@@ -1,6 +1,6 @@
-package CSG::Storage::Slot::Command::collect;
+package CSG::Storage::SlotCtl::Command::collect;
 
-use CSG::Storage::Slot -command;
+use CSG::Storage::SlotCtl -command;
 use CSG::Storage::Slots::DB;
 use CSG::Logger;
 
@@ -17,8 +17,8 @@ sub opt_spec {
 sub validate_args {
   my ($self, $opts, $args) = @_;
 
-  if ($opts->{prefix}) {
-    $self->usage_error('PREFIX does not exist') unless -e $opts->{prefix};
+  if ($opts->{prefix} and not -e $opts->{prefix}) {
+    $self->usage_error('PREFIX does not exist');
   }
 }
 
@@ -49,4 +49,4 @@ __END__
 
 =head1
 
-CSG::Storage::Slot::Command::collect - Collect disk usage info for a slot storage filesystem
+CSG::Storage::SlotCtl::Command::collect - Collect disk usage info for a slot storage filesystem
