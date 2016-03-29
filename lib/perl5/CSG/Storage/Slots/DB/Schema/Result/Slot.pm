@@ -159,8 +159,14 @@ __PACKAGE__->belongs_to(
 
 
 # You can replace this text with custom code or comments, and it will be preserved on regeneration
+use Number::Bytes::Human qw(format_bytes);
+
 sub to_string {
   my ($self) = @_;
-  return sprintf 'Name: %-10s Project: %-10s Pool: %-10s Size: %s', $self->name, $self->pool->project->name, $self->pool->name, $self->size;
+  return sprintf 'Name: %-10s Project: %-10s Pool: %-10s Size: %s',
+    $self->name,
+    $self->pool->project->name,
+    $self->pool->name,
+    format_bytes($self->size);
 }
 1;
