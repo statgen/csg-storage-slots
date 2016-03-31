@@ -26,9 +26,15 @@ around [qw(name project size path sha1)] => sub {
   my $self = shift;
 
   unless ($self->has_record) {
-    my $schema = CSG::Storage::Slots::DB->new();
-    my $pool   = $schema->resultset('Pool')->next_available($self->{project}, $self->{size});
-    my $record = $schema->resultset('Slot')->find_or_create(
+    my $schema  = CSG::Storage::Slots::DB->new();
+    my $project = $schema->resultset('Project')->find({name => $self->{project}});
+    my $pool    = $project->next_available_pool($self->{size});
+
+    unless ($pool) {
+      CSG::Storage::Slots::Exceptions::Pools::NoPoolAvailable->throw();
+    }
+
+    my $record  = $schema->resultset('Slot')->find_or_create(
       {
         name    => $self->{name},
         size    => $self->{size},

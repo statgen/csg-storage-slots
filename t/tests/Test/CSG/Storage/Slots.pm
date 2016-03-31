@@ -14,7 +14,7 @@ sub class {
   return 'CSG::Storage::Slots';
 }
 
-sub test_new : Test(5) {
+sub test_new : Test(6) {
   my ($self) = @_;
 
   throws_ok {$self->class->new()} 'Moose::Exception::AttributeIsRequired', 'missing all params for new()';
@@ -26,6 +26,12 @@ sub test_new : Test(5) {
 
   throws_ok {$self->class->new(name => 'foo', project => 'foo', size => parse_bytes('100TB'))}
   'Moose::Exception::ValidationFailedForInlineTypeConstraint', 'invalid project name';
+
+  throws_ok {
+    my $slot = $self->class->new(name => 'baz', project => 'proj1', size => parse_bytes('500TB'));
+    $slot->size;
+  }
+  'CSG::Storage::Slots::Exceptions::Pools::NoPoolAvailable', 'not enough space in exisint pools';
 }
 
 sub test_path : Test(2) {

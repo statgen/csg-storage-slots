@@ -8,6 +8,7 @@ use File::Path qw(remove_tree);
 use File::Spec;
 use File::Temp qw(tempdir);
 use YAML qw(LoadFile);
+use Number::Bytes::Human qw(parse_bytes);
 
 use CSG::Storage::Config;
 use CSG::Storage::Slots::DB;
@@ -45,8 +46,8 @@ sub _startup : Test(startup) {
       {
         name       => $pool->{name},
         hostname   => $pool->{hostname},
-        size_used  => $pool->{size_used},
-        size_total => $pool->{size_total},
+        size_used  => parse_bytes($pool->{size_used}),
+        size_total => parse_bytes($pool->{size_total}),
         path       => $pool->{path},
         type_id    => $type->id,
         project_id => $project->id,

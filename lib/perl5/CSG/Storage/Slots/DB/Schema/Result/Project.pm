@@ -133,4 +133,17 @@ __PACKAGE__->has_many(
 
 
 # You can replace this text with custom code or comments, and it will be preserved on regeneration
+sub next_available_pool {
+  my ($self, $size) = @_;
+
+  my @pools = ();
+  for my $pool ($self->pools) {
+    next unless $pool->is_available($size);
+    push @pools, $pool;
+  }
+
+  return unless @pools;
+  return $pools[rand(@pools)];
+}
+
 1;

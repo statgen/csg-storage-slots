@@ -213,4 +213,33 @@ __PACKAGE__->belongs_to(
 
 
 # You can replace this text with custom code or comments, and it will be preserved on regeneration
+sub max_available {
+  my ($self) = @_;
+  return $self->size_total - ($self->size_total * .10);
+}
+
+sub allocated {
+  my ($self) = @_;
+  my $allocated = $self->slots->search({},{+select => {sum => 'size', -as => 'allocated'}})->single;
+  return $allocated->get_column('allocated') // 0;
+}
+
+sub is_full {
+  my ($self) = @_;
+  return $self->size_used >= $self->size_total;
+}
+
+sub over_threshold {
+  my ($self, $size) = @_;
+  return ($self->allocated + $size) > $self->max_available;
+}
+
+sub is_available {
+  my ($self, $size) = @_;
+  return if $self->is_full;
+  return if $self->over_threshold($size);
+  return 1;
+}
+
+
 1;

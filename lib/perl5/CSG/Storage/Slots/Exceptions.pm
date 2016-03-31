@@ -12,6 +12,9 @@ use Exception::Class (
     description => 'failed to create skeleton directory sturcture',
     fields      => [qw(error)],
   },
+  __PACKAGE__ . '::Pools::NoPoolAvailable' => {
+    description => 'unable to find pool with enough available space',
+  }
 );
 
 1;
