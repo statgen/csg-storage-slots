@@ -85,6 +85,12 @@ __PACKAGE__->table("pools");
   is_nullable: 0
   size: 45
 
+=head2 active
+
+  data_type: 'tinyint'
+  default_value: 1
+  is_nullable: 0
+
 =head2 created_at
 
   data_type: 'datetime'
@@ -117,6 +123,8 @@ __PACKAGE__->add_columns(
   { data_type => "bigint", default_value => 0, is_nullable => 0 },
   "path",
   { data_type => "varchar", is_nullable => 0, size => 45 },
+  "active",
+  { data_type => "tinyint", default_value => 1, is_nullable => 0 },
   "created_at",
   {
     data_type => "datetime",
@@ -208,8 +216,8 @@ __PACKAGE__->belongs_to(
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.07043 @ 2016-03-23 08:21:32
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:E84JIQykl7ZtMY22NJgLOw
+# Created by DBIx::Class::Schema::Loader v0.07043 @ 2016-03-31 14:00:57
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:NK7fAsuj7rlpX1cSCLQxtw
 
 
 # You can replace this text with custom code or comments, and it will be preserved on regeneration
@@ -236,6 +244,7 @@ sub over_threshold {
 
 sub is_available {
   my ($self, $size) = @_;
+  return unless $self->active;
   return if $self->is_full;
   return if $self->over_threshold($size);
   return 1;
